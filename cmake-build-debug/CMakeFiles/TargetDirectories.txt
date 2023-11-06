@@ -1,0 +1,3 @@
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/CMakeFiles/proyecto1_arquitectura.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/CMakeFiles/rebuild_cache.dir

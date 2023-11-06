@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.26)
+project(proyecto1_arquitectura)
+
+set(CMAKE_CXX_STANDARD 17) # Configura el estándar de C++ que desees utilizar, como 17 o 20
+
+add_executable(proyecto1_arquitectura
+        fluid.cpp
+        progargs/progargs.hpp)
