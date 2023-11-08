@@ -49,11 +49,29 @@ cmake_ninja_workdir = /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/c
 
 build cmake_object_order_depends_target_proyecto1_arquitectura: phony || CMakeFiles/proyecto1_arquitectura.dir
 
-build CMakeFiles/proyecto1_arquitectura.dir/fluid.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/fluid.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
-  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/fluid.cpp.o.d
+build CMakeFiles/proyecto1_arquitectura.dir/fluid/fluid.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/fluid/fluid.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
+  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/fluid/fluid.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
-  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir
+  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir/fluid
+
+build CMakeFiles/proyecto1_arquitectura.dir/sim/progargs.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/progargs.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
+  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/sim/progargs.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
+  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir/sim
+
+build CMakeFiles/proyecto1_arquitectura.dir/sim/grid.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/grid.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
+  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/sim/grid.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
+  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir/sim
+
+build CMakeFiles/proyecto1_arquitectura.dir/sim/block.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/block.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
+  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/sim/block.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
+  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir/sim
 
 
 # =============================================================================
@@ -63,7 +81,7 @@ build CMakeFiles/proyecto1_arquitectura.dir/fluid.cpp.o: CXX_COMPILER__proyecto1
 #############################################
 # Link the executable proyecto1_arquitectura
 
-build proyecto1_arquitectura: CXX_EXECUTABLE_LINKER__proyecto1_arquitectura_Debug CMakeFiles/proyecto1_arquitectura.dir/fluid.cpp.o
+build proyecto1_arquitectura: CXX_EXECUTABLE_LINKER__proyecto1_arquitectura_Debug CMakeFiles/proyecto1_arquitectura.dir/fluid/fluid.cpp.o CMakeFiles/proyecto1_arquitectura.dir/sim/progargs.cpp.o CMakeFiles/proyecto1_arquitectura.dir/sim/grid.cpp.o CMakeFiles/proyecto1_arquitectura.dir/sim/block.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
   POST_BUILD = :

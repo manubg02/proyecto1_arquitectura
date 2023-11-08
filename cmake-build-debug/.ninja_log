@@ -1,4 +1,10 @@
 # ninja log v5
 1	470	1699308908577193145	CMakeFiles/proyecto1_arquitectura.dir/fluid.cpp.o	d03b453c748d4fc7
-0	10	1699309142471380843	build.ninja	50d4976f02965719
-470	516	1699308908617193492	proyecto1_arquitectura	ffdb18f4fe008252
+1	12	1699451082533353684	build.ninja	50d4976f02965719
+0	14	1699450553316497674	CMakeFiles/proyecto1_arquitectura.dir/sim/progargs.cpp.o	719d93520edac494
+14	58	1699450553360497134	proyecto1_arquitectura	a9e44db9f458b5ec
+1	14	1699450553316497674	CMakeFiles/proyecto1_arquitectura.dir/sim/block.cpp.o	ff6a47a93d8d3d05
+1	14	1699450553316497674	CMakeFiles/proyecto1_arquitectura.dir/sim/grid.cpp.o	2d37d7ce1874e66d
+0	11	1699451082533353684	build.ninja	50d4976f02965719
+0	467	1699451083005348706	CMakeFiles/proyecto1_arquitectura.dir/fluid/fluid.cpp.o	9e8ba81fbc7da745
+468	509	1699451083045348283	proyecto1_arquitectura	fcf73d2045fd29f7
