@@ -1,13 +1,4 @@
 /snap/clion/250/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/250/bin/ninja/linux/x64/ninja -G Ninja -S /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura -B /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug
 -- Configuring done (0.0s)
-CMake Error at CMakeLists.txt:6 (add_executable):
-  Cannot find source file:
-
-    progargs/progargs.hpp
-
-
-CMake Error at CMakeLists.txt:6 (add_executable):
-  No SOURCES given to target: proyecto1_arquitectura
-
-
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Generating done (0.0s)
+-- Build files have been written to: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug

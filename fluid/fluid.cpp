@@ -9,8 +9,18 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
+#include "../sim/progargs.hpp"
 
-int main() {
+int main(int argc, char *argv[]) {
+
+    ProgArgs progArgs(argc, argv);
+
+    // Verificar si hubo errores al analizar los argumentos
+    if (progArgs.getErrorCode() != 0) {
+        std::cerr << "Error: " << progArgs.getErrorMessage() << std::endl;
+        return progArgs.getErrorCode();
+    }
+
     std::ifstream file("../small.fld", std::ios::binary);
 
     if (file) {
@@ -24,7 +34,7 @@ int main() {
         // Imprime el valor en la consola
         std::cout << "Particulas por metro: " << ppm << std::endl;
 
-        file.seekg(0, std::ios::cur);
+        //file.seekg(, std::ios::cur);
         file.read(reinterpret_cast<char *>(&intValue), sizeof(intValue));
         int np = *reinterpret_cast<int *>(&intValue);
         std::cout << "Numero de particulas: " << np << std::endl;
