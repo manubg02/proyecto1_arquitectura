@@ -41,53 +41,53 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target proyecto1_arquitectura
+# Object build statements for EXECUTABLE target fluid
 
 
 #############################################
-# Order-only phony target for proyecto1_arquitectura
+# Order-only phony target for fluid
 
-build cmake_object_order_depends_target_proyecto1_arquitectura: phony || CMakeFiles/proyecto1_arquitectura.dir
+build cmake_object_order_depends_target_fluid: phony || CMakeFiles/fluid.dir
 
-build CMakeFiles/proyecto1_arquitectura.dir/fluid/fluid.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/fluid/fluid.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
-  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/fluid/fluid.cpp.o.d
+build CMakeFiles/fluid.dir/fluid/fluid.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/fluid/fluid.cpp || cmake_object_order_depends_target_fluid
+  DEP_FILE = CMakeFiles/fluid.dir/fluid/fluid.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
-  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir/fluid
+  OBJECT_DIR = CMakeFiles/fluid.dir
+  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/fluid
 
-build CMakeFiles/proyecto1_arquitectura.dir/sim/progargs.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/progargs.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
-  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/sim/progargs.cpp.o.d
+build CMakeFiles/fluid.dir/sim/progargs.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/progargs.cpp || cmake_object_order_depends_target_fluid
+  DEP_FILE = CMakeFiles/fluid.dir/sim/progargs.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
-  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir/sim
+  OBJECT_DIR = CMakeFiles/fluid.dir
+  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/sim
 
-build CMakeFiles/proyecto1_arquitectura.dir/sim/grid.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/grid.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
-  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/sim/grid.cpp.o.d
+build CMakeFiles/fluid.dir/sim/grid.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/grid.cpp || cmake_object_order_depends_target_fluid
+  DEP_FILE = CMakeFiles/fluid.dir/sim/grid.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
-  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir/sim
+  OBJECT_DIR = CMakeFiles/fluid.dir
+  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/sim
 
-build CMakeFiles/proyecto1_arquitectura.dir/sim/block.cpp.o: CXX_COMPILER__proyecto1_arquitectura_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/block.cpp || cmake_object_order_depends_target_proyecto1_arquitectura
-  DEP_FILE = CMakeFiles/proyecto1_arquitectura.dir/sim/block.cpp.o.d
+build CMakeFiles/fluid.dir/sim/block.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/block.cpp || cmake_object_order_depends_target_fluid
+  DEP_FILE = CMakeFiles/fluid.dir/sim/block.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
-  OBJECT_FILE_DIR = CMakeFiles/proyecto1_arquitectura.dir/sim
+  OBJECT_DIR = CMakeFiles/fluid.dir
+  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/sim
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target proyecto1_arquitectura
+# Link build statements for EXECUTABLE target fluid
 
 
 #############################################
-# Link the executable proyecto1_arquitectura
+# Link the executable fluid
 
-build proyecto1_arquitectura: CXX_EXECUTABLE_LINKER__proyecto1_arquitectura_Debug CMakeFiles/proyecto1_arquitectura.dir/fluid/fluid.cpp.o CMakeFiles/proyecto1_arquitectura.dir/sim/progargs.cpp.o CMakeFiles/proyecto1_arquitectura.dir/sim/grid.cpp.o CMakeFiles/proyecto1_arquitectura.dir/sim/block.cpp.o
+build fluid: CXX_EXECUTABLE_LINKER__fluid_Debug CMakeFiles/fluid.dir/fluid/fluid.cpp.o CMakeFiles/fluid.dir/sim/progargs.cpp.o CMakeFiles/fluid.dir/sim/grid.cpp.o CMakeFiles/fluid.dir/sim/block.cpp.o
   FLAGS = -g
-  OBJECT_DIR = CMakeFiles/proyecto1_arquitectura.dir
+  OBJECT_DIR = CMakeFiles/fluid.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = proyecto1_arquitectura
-  TARGET_PDB = proyecto1_arquitectura.dbg
+  TARGET_FILE = fluid
+  TARGET_PDB = fluid.dbg
 
 
 #############################################
@@ -123,7 +123,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug
 
-build all: phony proyecto1_arquitectura
+build all: phony fluid
 
 # =============================================================================
 # Built-in targets

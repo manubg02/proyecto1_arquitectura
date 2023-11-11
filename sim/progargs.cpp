@@ -19,23 +19,32 @@ void ProgArgs::parseArguments(int argc, char *argv[]) {
         return;
     }
 
+    // Verificar si el primer carácter es un dígito o el signo negativo
+    if (!std::isdigit(argv[1][0]) && argv[1][0] != '-') {
+        errorMessage = "Time steps must be numeric.";
+        errorCode = -1;
+        return;
+    }
+
+    // Verificar si el resto de la cadena contiene solo dígitos
+    for (size_t i = 1; i < std::string(argv[1]).size(); ++i) {
+        if (!std::isdigit(argv[1][i])) {
+            errorMessage = "Time steps must be numeric.";
+            errorCode = -1;
+            return;
+        }
+    }
+
     // Obtener el número de pasos de tiempo
     try {
         timeSteps = std::stoi(argv[1]);
-
-        // Verifica si cada carácter de la cadena es un dígito
-        for (char c : std::string(argv[1])) {
-            if (!std::isdigit(c)) {
-                throw std::invalid_argument("");
-            }
-        }
     } catch (const std::invalid_argument &) {
         errorMessage = "Time steps must be numeric.";
         errorCode = -1;
         return;
     }
 
-    // Verificar si el primer argumento es un número entero positivo
+    // Verificar si el número de pasos de tiempo es un entero positivo
     if (timeSteps <= 0) {
         errorMessage = "Invalid number of time steps.";
         errorCode = -2;
@@ -50,22 +59,22 @@ void ProgArgs::parseArguments(int argc, char *argv[]) {
         errorCode = -3;
         return;
     }
-    if (file){
+    if (file) {
         file.seekg(4, std::ios::cur);
         file.read(reinterpret_cast<char *>(&intValue), sizeof(intValue));
         int np = *reinterpret_cast<int *>(&intValue);
-        if (np <= 0){
+        if (np <= 0) {
             errorMessage = "Invalid number of particles: 0.";
             errorCode = -5;
-            return ;
+            return;
         }
-
     }
 
     outputFile = argv[3];
 
     errorCode = 0;
 }
+
 
 int ProgArgs::getTimeSteps() const {
     return timeSteps;
