@@ -11,7 +11,7 @@
 #include <filesystem>
 #include "../sim/progargs.hpp"
 #include "../sim/grid.hpp"
-
+#include <typeinfo>
 int main(int argc, char *argv[]) {
 
     ProgArgs progArgs(argc, argv);
@@ -25,19 +25,6 @@ int main(int argc, char *argv[]) {
 
     ParticleArray particles;
     guardar_particulas(particles, argv[2]);
-
-    for (int i = 0; i < particles.px.size(); ++i) {
-        std::cout << "Particula " << i+1 << " : ("
-                  << particles.px[i] << ", "
-                  << particles.py[i] << ", "
-                  << particles.pz[i] << ", "
-                  << particles.hvx[i] << ", "
-                  << particles.hvy[i] << ", "
-                  << particles.hvz[i] << ", "
-                  << particles.vx[i] << ", "
-                  << particles.vy[i] << ", "
-                  << particles.vz[i] << ")" << std::endl;
-    }
 
 
     return 0;

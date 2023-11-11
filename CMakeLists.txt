@@ -10,4 +10,5 @@ add_executable(fluid
         sim/grid.hpp
         sim/grid.cpp
         sim/block.cpp
-        sim/block.hpp)
+        sim/block.hpp
+)

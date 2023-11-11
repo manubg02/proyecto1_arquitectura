@@ -73,6 +73,12 @@ build CMakeFiles/fluid.dir/sim/block.cpp.o: CXX_COMPILER__fluid_unscanned_Debug 
   OBJECT_DIR = CMakeFiles/fluid.dir
   OBJECT_FILE_DIR = CMakeFiles/fluid.dir/sim
 
+build CMakeFiles/fluid.dir/sim/prueba.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/prueba.cpp || cmake_object_order_depends_target_fluid
+  DEP_FILE = CMakeFiles/fluid.dir/sim/prueba.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/fluid.dir
+  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/sim
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target fluid
@@ -81,7 +87,7 @@ build CMakeFiles/fluid.dir/sim/block.cpp.o: CXX_COMPILER__fluid_unscanned_Debug 
 #############################################
 # Link the executable fluid
 
-build fluid: CXX_EXECUTABLE_LINKER__fluid_Debug CMakeFiles/fluid.dir/fluid/fluid.cpp.o CMakeFiles/fluid.dir/sim/progargs.cpp.o CMakeFiles/fluid.dir/sim/grid.cpp.o CMakeFiles/fluid.dir/sim/block.cpp.o
+build fluid: CXX_EXECUTABLE_LINKER__fluid_Debug CMakeFiles/fluid.dir/fluid/fluid.cpp.o CMakeFiles/fluid.dir/sim/progargs.cpp.o CMakeFiles/fluid.dir/sim/grid.cpp.o CMakeFiles/fluid.dir/sim/block.cpp.o CMakeFiles/fluid.dir/sim/prueba.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/fluid.dir
   POST_BUILD = :
