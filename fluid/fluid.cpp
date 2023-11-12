@@ -24,7 +24,13 @@ int main(int argc, char *argv[]) {
     }
 
     ParticleArray particles;
-    guardar_particulas(particles, argv[2]);
+    try{
+        guardar_particulas(particles, argv[2]);
+    }catch (const std::runtime_error &e){
+        std::cerr << "Error: " << e.what() << std::endl;
+        return -5;
+    }
+
 
 
     return 0;
