@@ -1,7 +1,7 @@
 # ninja log v5
 1	470	1699308908577193145	CMakeFiles/proyecto1_arquitectura.dir/fluid.cpp.o	d03b453c748d4fc7
 0	334	1699735813417695645	CMakeFiles/fluid.dir/sim/grid.cpp.o	ec608793a696f8c6
-0	11	1699811795335117143	build.ninja	50d4976f02965719
+0	11	1700302671841595638	build.ninja	50d4976f02965719
 0	608	1699735813689708484	CMakeFiles/fluid.dir/fluid/fluid.cpp.o	2135a96c37ad0ff0
 1	251	1699608912765440246	CMakeFiles/proyecto1_arquitectura.dir/sim/progargs.cpp.o	719d93520edac494
 1	14	1699735813097680542	CMakeFiles/fluid.dir/sim/block.cpp.o	54dbd64508873057
@@ -9,5 +9,4 @@
 0	292	1699735813373693569	CMakeFiles/fluid.dir/sim/progargs.cpp.o	76db9c23b320c256
 505	552	1699608913065441331	proyecto1_arquitectura	fcf73d2045fd29f7
 1	14	1699450553316497674	CMakeFiles/proyecto1_arquitectura.dir/sim/block.cpp.o	ff6a47a93d8d3d05
-0	176	1699735932926888807	CMakeFiles/fluid.dir/sim/prueba.cpp.o	5aa927ede0c88064
 1	14	1699450553316497674	CMakeFiles/proyecto1_arquitectura.dir/sim/grid.cpp.o	2d37d7ce1874e66d

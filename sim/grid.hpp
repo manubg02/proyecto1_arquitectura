@@ -26,7 +26,7 @@ struct ParticleArray {
     std::vector<double> px, py, pz;   // Cambiados a double
     std::vector<double> hvx, hvy, hvz; // Cambiados a double
     std::vector<double> vx, vy, vz;   // Cambiados a double
-    std::vector<int> i, j, k; //bloque
+    std::vector<int> i, j, k; //bloque  i[0]  i[1]
 };
 
 // Prototipo de la función para guardar partículas en el grid

@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         return -5;
     }
 
-    for (int i = 0; i < particles.px.size(); ++i) {
+    for (auto i = 0u; i < particles.px.size(); ++i) {
         std::cout << "Particula " << i+1 << " : ("
                   << particles.px[i] << ", "
                   << particles.py[i] << ", "
@@ -41,10 +41,11 @@ int main(int argc, char *argv[]) {
                   << particles.hvz[i] << ", "
                   << particles.vx[i] << ", "
                   << particles.vy[i] << ", "
-                  << particles.vz[i] << ")" << std::endl;
+                  << particles.vz[i] << ")"
+                  << " (" << particles.i[i] << ", "
+                  << particles.j[i] << ", "
+                  << particles.k[i] << ")" <<std::endl;
     }
-
-
 
 
     return 0;

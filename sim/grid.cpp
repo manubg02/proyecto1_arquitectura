@@ -86,7 +86,6 @@ void guardar_particulas(ParticleArray& particles, const std::string& filename) {
         particles.k.resize(np);
 
         count = 0;
-        std::cout<<count<<std::endl;
 
         while (count < np) {
             file.read(reinterpret_cast<char*>(&intValue), sizeof(intValue));
@@ -137,8 +136,6 @@ void guardar_particulas(ParticleArray& particles, const std::string& filename) {
 
             count += 1;
         }
-
-
 
         // Cerrar el archivo después de usarlo
         file.close();

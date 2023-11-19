@@ -1,3 +1,12 @@
-/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/CMakeFiles/fluid.dir
 /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-build/CMakeFiles/edit_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-build/CMakeFiles/rebuild_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-build/include/CMakeFiles/edit_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-build/include/CMakeFiles/rebuild_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/sim/CMakeFiles/sim.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/sim/CMakeFiles/edit_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/sim/CMakeFiles/rebuild_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/fluid/CMakeFiles/fluid.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/fluid/CMakeFiles/edit_cache.dir
+/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/fluid/CMakeFiles/rebuild_cache.dir
