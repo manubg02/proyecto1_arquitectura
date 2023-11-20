@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cctype>
 #include <fstream>
+#include "grid.cpp"
 
 ProgArgs::ProgArgs(int argc, char *argv[]) {
     parseArguments(argc, argv);
@@ -61,14 +62,30 @@ void ProgArgs::parseArguments(int argc, char *argv[]) {
     }
     if (file) {
         file.seekg(4, std::ios::cur);
-        file.read(reinterpret_cast<char *>(&intValue), sizeof(intValue));
-        int np = *reinterpret_cast<int *>(&intValue);
+        int np = static_cast<double>(read_binary_value<float>(file));
         if (np <= 0) {
             errorMessage = "Invalid number of particles: 0.";
             errorCode = -5;
             return;
         }
+
+        int count = 0;
+        float aux;
+        while (file.read(reinterpret_cast<char*>(&aux), sizeof(aux))) {
+            file.seekg(-4, std::ios::cur);
+            file.seekg(36, std::ios::cur);
+
+            count += 1;
+        }
+
+        file.clear();  // Limpia cualquier flag de error
+
+        if (count != np) {
+            errorMessage = "Number of particles mismatch. Header: " + std::to_string(np) + ", Found: " + std::to_string(count);
+            errorCode = -5;
+        }
     }
+
 
     outputFile = argv[3];
 
