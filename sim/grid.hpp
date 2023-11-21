@@ -28,6 +28,7 @@ const double amortiguamiento = 128;
 const double viscosidad = 0.4;
 const double tamaño_particula = 0.0002;
 const double paso_tiempo = 0.001;
+const double comparar_colision = 1e-10;
 
 // Constantes vectoriales
 const std::vector<double> gravedad = {0.0, -9.8, 0.0};
@@ -82,6 +83,19 @@ public:
     void actualizar_aceleracion(int i, int j, ParticleArray& particles);
 
     void colisiones(ParticleArray& particles);
+    void bucle_bloque_x0(const std::vector<int>& block_list, ParticleArray& particles);
+    void bucle_bloque_y0(const std::vector<int>& block_list, ParticleArray& particles);
+    void bucle_bloque_z0(const std::vector<int>& block_list, ParticleArray& particles);
+    void bucle_bloque_xmenos1(const std::vector<int> &block_list, ParticleArray& particles);
+    void bucle_bloque_ymenos1(const std::vector<int> &block_list, ParticleArray& particles);
+    void bucle_bloque_zmenos1(const std::vector<int> &block_list, ParticleArray& particles);
+    void colisiones_particulas_eje_x(int id, ParticleArray& particles);
+    void colisiones_particulas_eje_y(int id, ParticleArray& particles);
+    void colisiones_particulas_eje_z(int id, ParticleArray& particles);
+    void colisiones_particulas_eje_xmenos1(int id, ParticleArray& particles);
+    void colisiones_particulas_eje_ymenos1(int id, ParticleArray& particles);
+    void colisiones_particulas_eje_zmenos1(int id, ParticleArray& particles);
+
 
 
 

@@ -317,14 +317,116 @@ void Grid::actualizar_aceleracion(int i, int j, ParticleArray& particles){
 
 // Colisiones
 void Grid::colisiones(ParticleArray& particles){
-    bucle_aux_block_0(nx_0, 0);
-    bucle_aux_block_0(ny_0, 1);
-    bucle_aux_block_0(nz_0, 2);
+    bucle_bloque_x0(nx_0, particles);
+    bucle_bloque_y0(ny_0, particles);
+    bucle_bloque_z0(nz_0, particles);
 
-    bucle_aux_block_n_less_1(nx_menos1, 0);
-    bucle_aux_block_n_less_1(ny_menos1, 1);
-    bucle_aux_block_n_less_1(nz_menos1, 2);
+    bucle_bloque_xmenos1(nx_menos1, particles);
+    bucle_bloque_ymenos1(ny_menos1, particles);
+    bucle_bloque_zmenos1(nz_menos1, particles);
 
 }
 
+void Grid::bucle_bloque_x0(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            colisiones_particulas_eje_x(particle_id, particles);
+        }
+    }
+}
 
+void Grid::bucle_bloque_y0(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            colisiones_particulas_eje_y(particle_id, particles);
+        }
+    }
+}
+
+void Grid::bucle_bloque_z0(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            colisiones_particulas_eje_z(particle_id, particles);
+        }
+    }
+}
+
+void Grid::colisiones_particulas_eje_x(int id, ParticleArray& particles){
+    double const limite_eje_x = particles.px[id] + particles.hvx[id] * paso_tiempo;
+    double const incremento_x = tamaño_particula - (limite_eje_x - bmin[0]);
+    if (incremento_x > comparar_colision){
+        double const aux = colision_rigidez * incremento_x - amortiguamiento * particles.vx[id];
+        particles.ax[id] += aux;
+    }
+}
+
+void Grid::colisiones_particulas_eje_y(int id, ParticleArray& particles){
+    double const limite_eje_y = particles.py[id] + particles.hvy[id] * paso_tiempo;
+    double const incremento_y = tamaño_particula - (limite_eje_y - bmin[1]);
+    if (incremento_y > comparar_colision){
+        double const aux = colision_rigidez * incremento_y - amortiguamiento * particles.vy[id];
+        particles.ay[id] += aux;
+    }
+}
+
+void Grid::colisiones_particulas_eje_z(int id, ParticleArray& particles){
+    double const limite_eje_z = particles.pz[id] + particles.hvz[id] * paso_tiempo;
+    double const incremento_z = tamaño_particula - (limite_eje_z - bmin[2]);
+    if (incremento_z > comparar_colision){
+        double const aux = colision_rigidez * incremento_z - amortiguamiento * particles.vz[id];
+        particles.az[id] += aux;
+    }
+}
+
+void Grid::bucle_bloque_xmenos1(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            colisiones_particulas_eje_xmenos1(particle_id, particles);
+        }
+    }
+}
+void Grid::bucle_bloque_ymenos1(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            colisiones_particulas_eje_ymenos1(particle_id, particles);
+        }
+    }
+}
+void Grid::bucle_bloque_zmenos1(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            colisiones_particulas_eje_zmenos1(particle_id, particles);
+        }
+    }
+}
+
+void Grid::colisiones_particulas_eje_xmenos1(int id, ParticleArray& particles){
+    double const limite_eje_x = particles.px[id] + particles.hvx[id] * paso_tiempo;
+    double const incremento_x = tamaño_particula - (bmax[0] - limite_eje_x);
+    if (incremento_x > comparar_colision){
+        double const aux = colision_rigidez * incremento_x + amortiguamiento * particles.vx[id];
+        particles.ax[id] -= aux;
+    }
+}
+void Grid::colisiones_particulas_eje_ymenos1(int id, ParticleArray& particles){
+    double const limite_eje_y = particles.py[id] + particles.hvy[id] * paso_tiempo;
+    double const incremento_y = tamaño_particula - (bmax[1] - limite_eje_y);
+    if (incremento_y > comparar_colision){
+        double const aux = colision_rigidez * incremento_y + amortiguamiento * particles.vy[id];
+        particles.ay[id] -= aux;
+    }
+}
+void Grid::colisiones_particulas_eje_zmenos1(int id, ParticleArray& particles){
+    double const limite_eje_z = particles.pz[id] + particles.hvz[id] * paso_tiempo;
+    double const incremento_z = tamaño_particula - (bmax[2] - limite_eje_z);
+    if (incremento_z > comparar_colision){
+        double const aux = colision_rigidez * incremento_z + amortiguamiento * particles.vz[id];
+        particles.az[id] -= aux;
+    }
+}
