@@ -21,6 +21,7 @@ T read_binary_value(std::ifstream& infile) {
 Grid::Grid(int time, std::string const& file_input, std::string const& file_output)
         : timeSteps(time), ppm(0), np(0), m(0), h(0), nx(0), ny(0), nz(0), sx(0), sy(0), sz(0){
     get_parameters(file_input);
+    constantes();
     grid_properties();
     print_grid();
     crear_bloques();
@@ -124,6 +125,18 @@ void Grid::get_parameters(const std::string& filename){
     }
 }
 
+void Grid::constantes() {
+    calculos.h_cuadrado = pow(h, 2);
+    calculos.h_sexta = pow(h, NUMBER_6);
+    calculos.trans_densidad = (NUMBER_315/(NUMBER_64 * M_PI * pow(h,NUMBER_9))) * m;
+
+
+    double const aux_calc = 1/(M_PI * calculos.h_sexta);
+    calculos.calc1 = NUMBER_15 * 3 * m * presion_rigidez * aux_calc * NUMBER_05;
+    calculos.calc2 = 2 * densidad_fluido;
+    calculos.calc3 = NUMBER_45 * viscosidad * m * aux_calc;
+}
+
 void Grid::grid_properties(){
     m = densidad_fluido/std::pow(ppm, 3); // Masa de una particula
     h = multiplicador_radio /ppm; // Longitud de suavizado
@@ -192,13 +205,13 @@ std::vector<int> Grid::calc_adjacent_blocks(int bloque_x, int bloque_y, int bloq
 }
 
 void Grid::block_type_check(int bloque_x, int bloque_y, int bloque_z, int bloque_id){
-    if (bloque_x == 0){nx_equal_0.push_back(bloque_id);}
-    if (bloque_y == 0){ny_equal_0.push_back(bloque_id);}
-    if (bloque_z == 0){nz_equal_0.push_back(bloque_id);}
+    if (bloque_x == 0){nx_0.push_back(bloque_id);}
+    if (bloque_y == 0){ny_0.push_back(bloque_id);}
+    if (bloque_z == 0){nz_0.push_back(bloque_id);}
 
-    if (bloque_x == nx - 1){nx_less_1.push_back(bloque_id);}
-    if (bloque_y == ny- 1){ny_less_1.push_back(bloque_id);}
-    if (bloque_z == nz - 1){nz_less_1.push_back(bloque_id);}
+    if (bloque_x == nx - 1){nx_menos1.push_back(bloque_id);}
+    if (bloque_y == ny- 1){ny_menos1.push_back(bloque_id);}
+    if (bloque_z == nz - 1){nz_menos1.push_back(bloque_id);}
 }
 
 void Grid::simulacion(ParticleArray& particles){
@@ -206,7 +219,7 @@ void Grid::simulacion(ParticleArray& particles){
     //en la primera iteracion
     inicializacion_aceleracion_densidad(particles);
     actualizar_ac_den(particles);
-    // colisions();
+    colisiones(particles);
     // particle_move();
     // iterations_limits_recient();
 
@@ -243,6 +256,16 @@ void Grid::actualizar_ac_den(ParticleArray& particles){
         particles.density[i] = transformacion_densidad(i, particles);
     }
 
+    for (int i=0; i<np; i++){
+        int const bloque = operation_block(particles.i[i], particles.j[i], particles.k[i]);
+        for (int const bloque_adyacente : grid_block[bloque].adjacent_blocks){
+            for (int j : grid_block[bloque_adyacente].index_particle_block){
+                if (i < j){
+                    actualizar_aceleracion(i, j, particles);
+                }
+            }
+        }
+    }
 }
 
 void Grid::incremento_densidad(int i, int j, ParticleArray& particles){
@@ -265,7 +288,43 @@ double Grid::calcular_modulo(int i, int j, ParticleArray& particles){
 }
 
 double Grid::transformacion_densidad(int i, ParticleArray& particles){
-    particles.density[i] += (particles.density[i] + pow(h, 6)) * (NUMBER_315/(NUMBER_64 * std::numbers::pi * pow(h, NUMBER_9))) * m;
+    particles.density[i] += (particles.density[i] + pow(h, 6)) * calculos.trans_densidad;
+}
+
+void Grid::actualizar_aceleracion(int i, int j, ParticleArray& particles){
+    double modulo_cuadrado = calcular_modulo(i, j, particles);
+    if (modulo_cuadrado < pow(h, 2)){
+        double const dij = sqrt(std::max(modulo_cuadrado, 1e-12));
+        double delta_aij_x;
+        double delta_aij_y;
+        double delta_aij_z;
+
+        double const parte1 = calculos.calc1 * pow((h-dij),2) * (particles.density[i] + particles.density[j] - calculos.calc2) * (1/dij);
+        double auxiliar = 1 / (particles.density[i] * particles.density[j]);
+
+        delta_aij_x = ((particles.px[i]-particles.px[j]) * parte1 + (particles.vx[j]-particles.vx[i]) * calculos.calc3) * auxiliar;
+        delta_aij_y = ((particles.py[i]-particles.py[j]) * parte1 + (particles.vy[j]-particles.vy[i]) * calculos.calc3) * auxiliar;
+        delta_aij_z = ((particles.pz[i]-particles.pz[j]) * parte1 + (particles.vz[j]-particles.vz[i]) * calculos.calc3) * auxiliar;
+
+        particles.ax[i] += delta_aij_x;
+        particles.ay[i] += delta_aij_y;
+        particles.az[i] += delta_aij_z;
+        particles.ax[j] -= delta_aij_x;
+        particles.ay[j] -= delta_aij_y;
+        particles.az[j] -= delta_aij_z;
+    }
+}
+
+// Colisiones
+void Grid::colisiones(ParticleArray& particles){
+    bucle_aux_block_0(nx_0, 0);
+    bucle_aux_block_0(ny_0, 1);
+    bucle_aux_block_0(nz_0, 2);
+
+    bucle_aux_block_n_less_1(nx_menos1, 0);
+    bucle_aux_block_n_less_1(ny_menos1, 1);
+    bucle_aux_block_n_less_1(nz_menos1, 2);
+
 }
 
 

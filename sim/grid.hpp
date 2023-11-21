@@ -34,6 +34,15 @@ const std::vector<double> gravedad = {0.0, -9.8, 0.0};
 const std::vector<double> bmax = {0.065, 0.1, 0.065};
 const std::vector<double> bmin = {-0.065, -0.08, -0.065};
 
+struct calculos{
+    double h_cuadrado;
+    double trans_densidad;
+    double h_sexta;
+    double calc1;
+    double calc2;
+    double calc3;
+};
+
 // Estructura de las partículas
 struct ParticleArray {
     std::vector<double> px, py, pz;   // Posiciones de cada particula
@@ -54,6 +63,7 @@ class Grid{
 public:
     Grid(int timeSteps, std::string const& file_input, std::string const& file_output);
     void get_parameters(const std::string& file_input);
+    void constantes();
     void grid_properties();
     void print_grid();
     void meter_particulas(const std::string& file_input, ParticleArray& particles);
@@ -69,6 +79,10 @@ public:
     void incremento_densidad(int i, int j, ParticleArray& particles);
     static double calcular_modulo(int i, int j, ParticleArray& particles);
     [[nodiscard]] double transformacion_densidad(int i, ParticleArray& particles);
+    void actualizar_aceleracion(int i, int j, ParticleArray& particles);
+
+    void colisiones(ParticleArray& particles);
+
 
 
 
@@ -86,7 +100,9 @@ private:
     double nx, ny, nz; //numero de bloques por coordenadas
     double sx, sy, sz; //size del bloque
     std::vector<block> grid_block;
-    std::vector<int> nx_equal_0, ny_equal_0, nz_equal_0, nx_less_1, ny_less_1, nz_less_1;
+    std::vector<int> nx_0, ny_0, nz_0, nx_menos1, ny_menos1, nz_menos1;
+
+    calculos calculos{};
 };
 
 
