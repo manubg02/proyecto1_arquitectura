@@ -27,7 +27,7 @@ Grid::Grid(int time, std::string const& file_input, std::string const& file_outp
     ParticleArray particles;
     meter_particulas(file_input, particles);
 
-    simulacion();
+    simulacion(particles);
 
 
 
@@ -106,6 +106,9 @@ void Grid::particle_block(ParticleArray& particles) {
         if (particles.k[index] < 0) {
             particles.k[index] = 0;
         }
+
+        int const bloque_particula = operation_block(particles.i[index], particles.j[index], particles.k[index]);
+        grid_block[bloque_particula].index_particle_block.push_back(index);
 
         index += 1;
 
@@ -198,67 +201,71 @@ void Grid::block_type_check(int bloque_x, int bloque_y, int bloque_z, int bloque
     if (bloque_z == nz - 1){nz_less_1.push_back(bloque_id);}
 }
 
+void Grid::simulacion(ParticleArray& particles){
+    //Do while para evitar recalcular la posicion de la particula en el bloque
+    //en la primera iteracion
+    inicializacion_aceleracion_densidad(particles);
+    actualizar_ac_den(particles);
+    // colisions();
+    // particle_move();
+    // iterations_limits_recient();
 
-
-
-
-void guardar_particulas(ParticleArray& particles, const std::string& filename) {
-    std::ifstream file(filename, std::ios::binary);
-    std::ostringstream errorMessage;
-    if (file) {
-
-        float ppm;
-        file.read(reinterpret_cast<char*>(&ppm), sizeof(ppm));
-
-        int32_t intValue;
-        file.read(reinterpret_cast<char*>(&intValue), sizeof(intValue));
-        int np = *reinterpret_cast<int*>(&intValue);
-
-
-        if (np <= 0){
-            errorMessage << "Invalid number of particles: "<<np<<".";
-            throw std::runtime_error(errorMessage.str());
-        }
-
-        std::streampos initialPos = file.tellg();
-
-
-
-        int count = 0;
-        float aux;
-        while (file.read(reinterpret_cast<char*>(&aux), sizeof(aux))) {
-            file.seekg(-4, std::ios::cur);
-            file.seekg(36, std::ios::cur);
-
-            count += 1;
-        }
-
-        file.clear();  // Limpia cualquier flag de error
-        file.seekg(initialPos);
-
-
-        if (count != np) {
-            std::ostringstream errorMessage;
-            errorMessage << "Number of particles mismatch. Header: " << np << ", Found: " << count;
-
-            throw std::runtime_error(errorMessage.str());
-        }
-
-
-
-
-
-        // Redimensiona los vectores según el número total de partículas
-
-
-        }
-
-        // Cerrar el archivo después de usarlo
-        file.close();
-
-
-
-    } else {
-        std::cerr << "Error opening the file." << std::endl;
+    for(int time = 1; time < timeSteps; time++){
+        inicializacion_aceleracion_densidad(particles);
+        // recalculate_particle_position_in_block();
+        // act_aceleration_density();
+        // colisions();
+        // particle_move();
+        // iterations_limits_recient();
     }
 }
+
+//Transformacion de la densidad y aceleracion
+void Grid::inicializacion_aceleracion_densidad(ParticleArray& particles){
+    for (int i = 0; i<np; i++){
+        particles.ax[i] = gravedad[0];
+        particles.ay[i] = gravedad[1];
+        particles.az[i] = gravedad[2];
+        particles.density[i] = 0;
+    }
+}
+
+void Grid::actualizar_ac_den(ParticleArray& particles){
+    for (int i=0; i<np; i++){
+        int const bloque = operation_block(particles.i[i], particles.j[i], particles.k[i]);
+        for (int const bloque_adyacente : grid_block[bloque].adjacent_blocks){
+            for (int j : grid_block[bloque_adyacente].index_particle_block){
+                if (i < j){
+                    incremento_densidad(i, j, particles);
+                }
+            }
+        }
+        particles.density[i] = transformacion_densidad(i, particles);
+    }
+
+}
+
+void Grid::incremento_densidad(int i, int j, ParticleArray& particles){
+    double modulo_cuadrado = calcular_modulo(i, j, particles);
+    if (modulo_cuadrado < pow(h, 2)){
+        double const incremento = pow((pow(h, 2) - modulo_cuadrado), 3);
+        particles.density[i] += incremento;
+        particles.density[j] += incremento;
+    }
+}
+double Grid::calcular_modulo(int i, int j, ParticleArray& particles){
+    //No hacemos la raiz cuadrada porque al hacer el cuadrado del modulo, la raiz se va con el cuadrado
+    //es una operacion que nos ahorramos
+    double cuadrado_x = pow((particles.px[i] - particles.px[j]), 2);
+    double cuadrado_y = pow((particles.py[i] - particles.py[j]), 2);
+    double cuadrado_z = pow((particles.pz[i] - particles.pz[j]), 2);
+
+    double const modulo_cuadrado = cuadrado_x + cuadrado_y + cuadrado_z;
+    return modulo_cuadrado;
+}
+
+double Grid::transformacion_densidad(int i, ParticleArray& particles){
+    particles.density[i] += (particles.density[i] + pow(h, 6)) * (NUMBER_315/(NUMBER_64 * std::numbers::pi * pow(h, NUMBER_9))) * m;
+}
+
+

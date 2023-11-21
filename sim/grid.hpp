@@ -36,11 +36,12 @@ const std::vector<double> bmin = {-0.065, -0.08, -0.065};
 
 // Estructura de las partículas
 struct ParticleArray {
-    std::vector<double> px, py, pz;   // Cambiados a double
-    std::vector<double> hvx, hvy, hvz; // Cambiados a double
-    std::vector<double> vx, vy, vz;   // Cambiados a double
-    std::vector<double> density;
-    std::vector<int> i, j, k; //bloque  i[0]  i[1]
+    std::vector<double> px, py, pz;   // Posiciones de cada particula
+    std::vector<double> hvx, hvy, hvz; // Gradiente de velocidad de cada particula
+    std::vector<double> vx, vy, vz;   // Velocidades de cada particula
+    std::vector<double> density; // Densidades de cada particula
+    std::vector<double> ax, ay, az; // Aceleraciones de cada particula
+    std::vector<int> i, j, k; //bloque  i[0],  i[1], ...
 };
 
 struct block{
@@ -62,7 +63,12 @@ public:
     [[nodiscard]] int operation_block(int operador_x, int operador_y, int operador_z) const;
     void block_type_check(int bloque_x, int bloque_y, int bloque_z, int bloque_id);
 
-    void simulacion();
+    void simulacion(ParticleArray& particles);
+    void inicializacion_aceleracion_densidad(ParticleArray& particles);
+    void actualizar_ac_den(ParticleArray& particles);
+    void incremento_densidad(int i, int j, ParticleArray& particles);
+    static double calcular_modulo(int i, int j, ParticleArray& particles);
+    [[nodiscard]] double transformacion_densidad(int i, ParticleArray& particles);
 
 
 

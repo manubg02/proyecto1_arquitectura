@@ -84,6 +84,8 @@ void ProgArgs::parseArguments(int argc, char *argv[]) {
             errorMessage = "Number of particles mismatch. Header: " + std::to_string(np) + ", Found: " + std::to_string(count);
             errorCode = -5;
         }
+    }else {
+        std::cerr << "Error opening the file." << std::endl;
     }
 
 
