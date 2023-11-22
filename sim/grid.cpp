@@ -18,7 +18,7 @@ T read_binary_value(std::ifstream& infile) {
 
 
 
-Grid::Grid(int time, std::string const& file_input, std::string const& file_output)
+Grid::Grid(int time, std::string const& file_input)
         : timeSteps(time), ppm(0), np(0), m(0), h(0), nx(0), ny(0), nz(0), sx(0), sy(0), sz(0){
     get_parameters(file_input);
     constantes();
@@ -27,12 +27,7 @@ Grid::Grid(int time, std::string const& file_input, std::string const& file_outp
     crear_bloques();
     ParticleArray particles;
     meter_particulas(file_input, particles);
-
     simulacion(particles);
-
-
-
-
         }
 
 
@@ -220,16 +215,16 @@ void Grid::simulacion(ParticleArray& particles){
     inicializacion_aceleracion_densidad(particles);
     actualizar_ac_den(particles);
     colisiones(particles);
-    // particle_move();
-    // iterations_limits_recient();
+    movimiento_particulas(particles);
+    limites_recinto(particles);
 
     for(int time = 1; time < timeSteps; time++){
         inicializacion_aceleracion_densidad(particles);
-        // recalculate_particle_position_in_block();
-        // act_aceleration_density();
-        // colisions();
-        // particle_move();
-        // iterations_limits_recient();
+        reposicionamiento_particulas(particles);
+        actualizar_ac_den(particles);
+        colisiones(particles);
+        movimiento_particulas(particles);
+        limites_recinto(particles);
     }
 }
 
@@ -243,6 +238,13 @@ void Grid::inicializacion_aceleracion_densidad(ParticleArray& particles){
     }
 }
 
+void Grid::reposicionamiento_particulas(ParticleArray& particles){
+    for (block& block: grid_block){
+        block.index_particle_block.clear();
+    }
+    particle_block(particles);
+}
+
 void Grid::actualizar_ac_den(ParticleArray& particles){
     for (int i=0; i<np; i++){
         int const bloque = operation_block(particles.i[i], particles.j[i], particles.k[i]);
@@ -253,7 +255,7 @@ void Grid::actualizar_ac_den(ParticleArray& particles){
                 }
             }
         }
-        particles.density[i] = transformacion_densidad(i, particles);
+        transformacion_densidad(i, particles);
     }
 
     for (int i=0; i<np; i++){
@@ -270,8 +272,8 @@ void Grid::actualizar_ac_den(ParticleArray& particles){
 
 void Grid::incremento_densidad(int i, int j, ParticleArray& particles){
     double modulo_cuadrado = calcular_modulo(i, j, particles);
-    if (modulo_cuadrado < pow(h, 2)){
-        double const incremento = pow((pow(h, 2) - modulo_cuadrado), 3);
+    if (modulo_cuadrado < calculos.h_cuadrado){
+        double const incremento = pow((calculos.h_cuadrado - modulo_cuadrado), 3);
         particles.density[i] += incremento;
         particles.density[j] += incremento;
     }
@@ -287,13 +289,13 @@ double Grid::calcular_modulo(int i, int j, ParticleArray& particles){
     return modulo_cuadrado;
 }
 
-double Grid::transformacion_densidad(int i, ParticleArray& particles){
+void Grid::transformacion_densidad(int i, ParticleArray& particles){
     particles.density[i] += (particles.density[i] + pow(h, 6)) * calculos.trans_densidad;
 }
 
 void Grid::actualizar_aceleracion(int i, int j, ParticleArray& particles){
     double modulo_cuadrado = calcular_modulo(i, j, particles);
-    if (modulo_cuadrado < pow(h, 2)){
+    if (modulo_cuadrado < calculos.h_cuadrado){
         double const dij = sqrt(std::max(modulo_cuadrado, 1e-12));
         double delta_aij_x;
         double delta_aij_y;
@@ -356,7 +358,7 @@ void Grid::bucle_bloque_z0(const std::vector<int> &block_list, ParticleArray& pa
 
 void Grid::colisiones_particulas_eje_x(int id, ParticleArray& particles){
     double const limite_eje_x = particles.px[id] + particles.hvx[id] * paso_tiempo;
-    double const incremento_x = tamaño_particula - (limite_eje_x - bmin[0]);
+    double const incremento_x = t_particula - (limite_eje_x - bmin[0]);
     if (incremento_x > comparar_colision){
         double const aux = colision_rigidez * incremento_x - amortiguamiento * particles.vx[id];
         particles.ax[id] += aux;
@@ -365,7 +367,7 @@ void Grid::colisiones_particulas_eje_x(int id, ParticleArray& particles){
 
 void Grid::colisiones_particulas_eje_y(int id, ParticleArray& particles){
     double const limite_eje_y = particles.py[id] + particles.hvy[id] * paso_tiempo;
-    double const incremento_y = tamaño_particula - (limite_eje_y - bmin[1]);
+    double const incremento_y = t_particula - (limite_eje_y - bmin[1]);
     if (incremento_y > comparar_colision){
         double const aux = colision_rigidez * incremento_y - amortiguamiento * particles.vy[id];
         particles.ay[id] += aux;
@@ -374,7 +376,7 @@ void Grid::colisiones_particulas_eje_y(int id, ParticleArray& particles){
 
 void Grid::colisiones_particulas_eje_z(int id, ParticleArray& particles){
     double const limite_eje_z = particles.pz[id] + particles.hvz[id] * paso_tiempo;
-    double const incremento_z = tamaño_particula - (limite_eje_z - bmin[2]);
+    double const incremento_z = t_particula - (limite_eje_z - bmin[2]);
     if (incremento_z > comparar_colision){
         double const aux = colision_rigidez * incremento_z - amortiguamiento * particles.vz[id];
         particles.az[id] += aux;
@@ -408,7 +410,7 @@ void Grid::bucle_bloque_zmenos1(const std::vector<int> &block_list, ParticleArra
 
 void Grid::colisiones_particulas_eje_xmenos1(int id, ParticleArray& particles){
     double const limite_eje_x = particles.px[id] + particles.hvx[id] * paso_tiempo;
-    double const incremento_x = tamaño_particula - (bmax[0] - limite_eje_x);
+    double const incremento_x = t_particula - (bmax[0] - limite_eje_x);
     if (incremento_x > comparar_colision){
         double const aux = colision_rigidez * incremento_x + amortiguamiento * particles.vx[id];
         particles.ax[id] -= aux;
@@ -416,7 +418,7 @@ void Grid::colisiones_particulas_eje_xmenos1(int id, ParticleArray& particles){
 }
 void Grid::colisiones_particulas_eje_ymenos1(int id, ParticleArray& particles){
     double const limite_eje_y = particles.py[id] + particles.hvy[id] * paso_tiempo;
-    double const incremento_y = tamaño_particula - (bmax[1] - limite_eje_y);
+    double const incremento_y = t_particula - (bmax[1] - limite_eje_y);
     if (incremento_y > comparar_colision){
         double const aux = colision_rigidez * incremento_y + amortiguamiento * particles.vy[id];
         particles.ay[id] -= aux;
@@ -424,9 +426,151 @@ void Grid::colisiones_particulas_eje_ymenos1(int id, ParticleArray& particles){
 }
 void Grid::colisiones_particulas_eje_zmenos1(int id, ParticleArray& particles){
     double const limite_eje_z = particles.pz[id] + particles.hvz[id] * paso_tiempo;
-    double const incremento_z = tamaño_particula - (bmax[2] - limite_eje_z);
+    double const incremento_z = t_particula - (bmax[2] - limite_eje_z);
     if (incremento_z > comparar_colision){
         double const aux = colision_rigidez * incremento_z + amortiguamiento * particles.vz[id];
         particles.az[id] -= aux;
+    }
+}
+
+//Movimiento
+void Grid::movimiento_particulas(ParticleArray& particles){
+    for (int i = 0; i<np; i++){
+        act_posicion(i, particles);
+        act_velocidad(i, particles);
+        act_gradiente(i, particles);
+    }
+}
+
+void Grid::act_posicion(int i, ParticleArray& particles){
+    particles.px[i] += particles.hvx[i] * paso_tiempo + particles.ax[i] * pow(paso_tiempo, 2);
+    particles.py[i] += particles.hvy[i] * paso_tiempo + particles.ay[i] * pow(paso_tiempo, 2);
+    particles.pz[i] += particles.hvz[i] * paso_tiempo + particles.az[i] * pow(paso_tiempo, 2);
+}
+
+void Grid::act_velocidad(int i, ParticleArray& particles){
+    particles.vx[i] = particles.hvx[i] + (particles.ax[i] * paso_tiempo) * NUMBER_05;
+    particles.vy[i] = particles.hvy[i] + (particles.ay[i] * paso_tiempo) * NUMBER_05;
+    particles.vz[i] = particles.hvz[i] + (particles.az[i] * paso_tiempo) * NUMBER_05;
+}
+
+void Grid::act_gradiente(int i, ParticleArray& particles){
+    particles.hvx[i] += particles.ax[i] * paso_tiempo;
+    particles.hvy[i] += particles.ay[i] * paso_tiempo;
+    particles.hvz[i] += particles.az[i] * paso_tiempo;
+
+}
+
+// Limites Recinto
+
+void Grid::limites_recinto(ParticleArray& particles){
+    limite_bloque_x0(nx_0, particles);
+    limite_bloque_y0(ny_0, particles);
+    limite_bloque_z0(nz_0, particles);
+
+    limite_bloque_xmenos1(nx_menos1, particles);
+    limite_bloque_ymenos1(ny_menos1, particles);
+    limite_bloque_zmenos1(nz_menos1, particles);
+}
+
+void Grid::limite_bloque_x0(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            limite_particulas_eje_x(particle_id, particles);
+        }
+    }
+}
+
+void Grid::limite_bloque_y0(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            limite_particulas_eje_y(particle_id, particles);
+        }
+    }
+}
+
+void Grid::limite_bloque_z0(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            limite_particulas_eje_z(particle_id, particles);
+        }
+    }
+}
+
+void Grid::limite_particulas_eje_x(int id, ParticleArray &particles) {
+    double const d_x = particles.px[id] - bmin[0];
+    if (d_x < 0){
+        particles.px[id] = bmin[0] - d_x;
+        particles.vx[id] = -particles.vx[id];
+        particles.hvx[id] = -particles.hvx[id];
+    }
+}
+void Grid::limite_particulas_eje_y(int id, ParticleArray &particles) {
+    double const d_y = particles.py[id] - bmin[1];
+    if (d_y < 0){
+        particles.py[id] = bmin[1] - d_y;
+        particles.vy[id] = -particles.vy[id];
+        particles.hvy[id] = -particles.hvy[id];
+    }
+}
+void Grid::limite_particulas_eje_z(int id, ParticleArray &particles) {
+    double const d_z = particles.pz[id] - bmin[2];
+    if (d_z < 0){
+        particles.pz[id] = bmin[2] - d_z;
+        particles.vz[id] = -particles.vz[id];
+        particles.hvz[id] = -particles.hvz[id];
+    }
+}
+
+void Grid::limite_bloque_xmenos1(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            limite_particulas_eje_xmenos1(particle_id, particles);
+        }
+    }
+}
+void Grid::limite_bloque_ymenos1(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            limite_particulas_eje_ymenos1(particle_id, particles);
+        }
+    }
+}
+void Grid::limite_bloque_zmenos1(const std::vector<int> &block_list, ParticleArray& particles){
+    for (int block_id: block_list){
+        block const block = grid_block[block_id];
+        for (int particle_id: block.index_particle_block){
+            limite_particulas_eje_zmenos1(particle_id, particles);
+        }
+    }
+}
+
+void Grid::limite_particulas_eje_xmenos1(int id, ParticleArray& particles){
+    double const d_x = bmax[0] - particles.px[id];
+    if (d_x<0){
+        particles.px[id] = bmax[0] + d_x;
+        particles.vx[id] = -particles.vx[id];
+        particles.hvx[id] = -particles.hvx[id];
+    }
+}
+void Grid::limite_particulas_eje_ymenos1(int id, ParticleArray& particles){
+    double const d_y = bmax[1] - particles.py[id];
+    if (d_y<0){
+        particles.py[id] = bmax[1] + d_y;
+        particles.vy[id] = -particles.vy[id];
+        particles.hvy[id] = -particles.hvy[id];
+    }
+}
+void Grid::limite_particulas_eje_zmenos1(int id, ParticleArray& particles){
+    double const d_z= bmax[2] - particles.pz[id];
+    if (d_z<0){
+        particles.pz[id] = bmax[2] + d_z;
+        particles.vz[id] = -particles.vz[id];
+        particles.hvz[id] = -particles.hvz[id];
     }
 }

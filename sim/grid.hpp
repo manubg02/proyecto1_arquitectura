@@ -26,7 +26,7 @@ const double presion_rigidez = 3;
 const double colision_rigidez = 30000;
 const double amortiguamiento = 128;
 const double viscosidad = 0.4;
-const double tamaño_particula = 0.0002;
+const double t_particula = 0.0002;
 const double paso_tiempo = 0.001;
 const double comparar_colision = 1e-10;
 
@@ -35,7 +35,7 @@ const std::vector<double> gravedad = {0.0, -9.8, 0.0};
 const std::vector<double> bmax = {0.065, 0.1, 0.065};
 const std::vector<double> bmin = {-0.065, -0.08, -0.065};
 
-struct calculos{
+struct calc{
     double h_cuadrado;
     double trans_densidad;
     double h_sexta;
@@ -62,7 +62,7 @@ struct block{
 
 class Grid{
 public:
-    Grid(int timeSteps, std::string const& file_input, std::string const& file_output);
+    Grid(int timeSteps, std::string const& file_input);
     void get_parameters(const std::string& file_input);
     void constantes();
     void grid_properties();
@@ -75,11 +75,12 @@ public:
     void block_type_check(int bloque_x, int bloque_y, int bloque_z, int bloque_id);
 
     void simulacion(ParticleArray& particles);
+    void reposicionamiento_particulas(ParticleArray& particles);
     void inicializacion_aceleracion_densidad(ParticleArray& particles);
     void actualizar_ac_den(ParticleArray& particles);
     void incremento_densidad(int i, int j, ParticleArray& particles);
     static double calcular_modulo(int i, int j, ParticleArray& particles);
-    [[nodiscard]] double transformacion_densidad(int i, ParticleArray& particles);
+    void transformacion_densidad(int i, ParticleArray& particles);
     void actualizar_aceleracion(int i, int j, ParticleArray& particles);
 
     void colisiones(ParticleArray& particles);
@@ -89,21 +90,32 @@ public:
     void bucle_bloque_xmenos1(const std::vector<int> &block_list, ParticleArray& particles);
     void bucle_bloque_ymenos1(const std::vector<int> &block_list, ParticleArray& particles);
     void bucle_bloque_zmenos1(const std::vector<int> &block_list, ParticleArray& particles);
-    void colisiones_particulas_eje_x(int id, ParticleArray& particles);
-    void colisiones_particulas_eje_y(int id, ParticleArray& particles);
-    void colisiones_particulas_eje_z(int id, ParticleArray& particles);
-    void colisiones_particulas_eje_xmenos1(int id, ParticleArray& particles);
-    void colisiones_particulas_eje_ymenos1(int id, ParticleArray& particles);
-    void colisiones_particulas_eje_zmenos1(int id, ParticleArray& particles);
+    static void colisiones_particulas_eje_x(int id, ParticleArray& particles);
+    static void colisiones_particulas_eje_y(int id, ParticleArray& particles);
+    static void colisiones_particulas_eje_z(int id, ParticleArray& particles);
+    static void colisiones_particulas_eje_xmenos1(int id, ParticleArray& particles);
+    static void colisiones_particulas_eje_ymenos1(int id, ParticleArray& particles);
+    static void colisiones_particulas_eje_zmenos1(int id, ParticleArray& particles);
 
+    void movimiento_particulas(ParticleArray& particles);
+    static void act_posicion(int i, ParticleArray& particles);
+    static void act_velocidad(int i, ParticleArray& particles);
+    static void act_gradiente(int i, ParticleArray& particles);
 
+    void limites_recinto(ParticleArray& particles);
+    void limite_bloque_x0(const std::vector<int> &block_list, ParticleArray& particles);
+    void limite_bloque_y0(const std::vector<int> &block_list, ParticleArray& particles);
+    void limite_bloque_z0(const std::vector<int> &block_list, ParticleArray& particles);
+    void limite_bloque_xmenos1(const std::vector<int> &block_list, ParticleArray& particles);
+    void limite_bloque_ymenos1(const std::vector<int> &block_list, ParticleArray& particles);
+    void limite_bloque_zmenos1(const std::vector<int> &block_list, ParticleArray& particles);
+    static void limite_particulas_eje_x(int id, ParticleArray& particles);
+    static void limite_particulas_eje_y(int id, ParticleArray& particles);
+    static void limite_particulas_eje_z(int id, ParticleArray& particles);
+    static void limite_particulas_eje_xmenos1(int id, ParticleArray& particles);
+    static void limite_particulas_eje_ymenos1(int id, ParticleArray& particles);
+    static void limite_particulas_eje_zmenos1(int id, ParticleArray& particles);
 
-
-
-    void parameter_values() const;
-    void constant_values_calculations();
-
-    void block_particle_assignment(ParticleArray& particles, int index) const;
 
 private:
     int timeSteps;
@@ -116,11 +128,8 @@ private:
     std::vector<block> grid_block;
     std::vector<int> nx_0, ny_0, nz_0, nx_menos1, ny_menos1, nz_menos1;
 
-    calculos calculos{};
+    calc calculos{};
 };
 
-
-// Prototipo de la función para guardar partículas en el grid
-void guardar_particulas(ParticleArray& particles, const std::string& filename);
 
 #endif //PROYECTO1_ARQUITECTURA_GRID_HPP

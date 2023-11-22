@@ -5,14 +5,12 @@
 #include <iostream>
 #include <cctype>
 #include <fstream>
-#include "grid.cpp"
 
 ProgArgs::ProgArgs(int argc, char *argv[]) {
     parseArguments(argc, argv);
 }
 
 void ProgArgs::parseArguments(int argc, char *argv[]) {
-    int32_t intValue;
     // Verificar el número correcto de argumentos
     if (argc != 4) {
         errorMessage = "Invalid number of arguments.";
@@ -62,7 +60,9 @@ void ProgArgs::parseArguments(int argc, char *argv[]) {
     }
     if (file) {
         file.seekg(4, std::ios::cur);
-        int np = static_cast<double>(read_binary_value<float>(file));
+        int32_t intValue;
+        file.read(reinterpret_cast<char*>(&intValue), sizeof(intValue));
+        int np = *reinterpret_cast<int*>(&intValue);
         if (np <= 0) {
             errorMessage = "Invalid number of particles: 0.";
             errorCode = -5;
@@ -92,6 +92,8 @@ void ProgArgs::parseArguments(int argc, char *argv[]) {
     outputFile = argv[3];
 
     errorCode = 0;
+
+
 }
 
 
@@ -114,3 +116,5 @@ int ProgArgs::getErrorCode() const {
 const std::string &ProgArgs::getErrorMessage() const {
     return errorMessage;
 }
+
+
