@@ -34,7 +34,6 @@ add_subdirectory(sim)
 add_subdirectory(fluid)
 
 # Set the executable output path to the project directory
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 # Unit tests and functional tests
 #enable_testing()
 #add_subdirectory(utest)

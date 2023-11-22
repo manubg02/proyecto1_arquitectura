@@ -31,60 +31,56 @@ Grid::Grid(int time, std::string const& file_input, std::string const& file_outp
 
 void Grid::meter_particulas(const std::string& filename, ParticleArray& particles) {
     std::ifstream file(filename, std::ios::binary);
-    if (file){
-        file.seekg(8, std::ios::cur);
-        particles.px.resize(np);
-        particles.py.resize(np);
-        particles.pz.resize(np);
-        particles.hvx.resize(np);
-        particles.hvy.resize(np);
-        particles.hvz.resize(np);
-        particles.vx.resize(np);
-        particles.vy.resize(np);
-        particles.vz.resize(np);
-        particles.i.resize(np);
-        particles.j.resize(np);
-        particles.k.resize(np);
-        particles.density.resize(np);
-        particles.ax.resize(np);
-        particles.ay.resize(np);
-        particles.az.resize(np);
-
-        int count = 0;
-
-        while (count < np) {
-            particles.px[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.i[count] = static_cast<int>((particles.px[count] - bmin[0]) / sx);
-
-            particles.py[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.j[count] = static_cast<int>((particles.py[count] - bmin[1]) / sy);
-            particles.pz[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.k[count] = static_cast<int>((particles.pz[count] - bmin[2]) / sz);
-
-            particles.hvx[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.hvy[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.hvz[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.vx[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.vy[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.vz[count] = static_cast<double>(read_binary_value<float>(file));
-
-            count += 1;
-        }
-        particulas_bloque(particles);
-        file.close();
+    if (!file.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo para lectura." << std::endl;
+        return;
     }
 
+    file.seekg(8, std::ios::cur);
+
+    // Reserva de memoria para los vectores
+    particles.px.resize(np);
+    particles.py.resize(np);
+    particles.pz.resize(np);
+    particles.hvx.resize(np);
+    particles.hvy.resize(np);
+    particles.hvz.resize(np);
+    particles.vx.resize(np);
+    particles.vy.resize(np);
+    particles.vz.resize(np);
+    particles.i.resize(np);
+    particles.j.resize(np);
+    particles.k.resize(np);
+    particles.density.resize(np);
+    particles.ax.resize(np);
+    particles.ay.resize(np);
+    particles.az.resize(np);
+
+    for (int count = 0; count < np; ++count) {
+        particles.px[count] = static_cast<double>(read_binary_value<float>(file));
+
+        particles.py[count] = static_cast<double>(read_binary_value<float>(file));
+
+        particles.pz[count] = static_cast<double>(read_binary_value<float>(file));
+
+        particles.hvx[count] = static_cast<double>(read_binary_value<float>(file));
+        particles.hvy[count] = static_cast<double>(read_binary_value<float>(file));
+        particles.hvz[count] = static_cast<double>(read_binary_value<float>(file));
+        particles.vx[count] = static_cast<double>(read_binary_value<float>(file));
+        particles.vy[count] = static_cast<double>(read_binary_value<float>(file));
+        particles.vz[count] = static_cast<double>(read_binary_value<float>(file));
+
+    }
+
+    particulas_bloque(particles);
+    file.close();
 }
 
-void Grid::get_parameters(const std::string& filename){
+void Grid::get_parameters(const std::string& filename) {
     std::ifstream file(filename, std::ios::binary);
-    std::ostringstream errorMessage;
-    if (file){
-        ppm = static_cast<double>(read_binary_value<float>(file));
-        np = static_cast<int>(read_binary_value<int>(file));
-        file.close();
-    }
-
+    ppm = static_cast<double>(read_binary_value<float>(file));
+    np = static_cast<int>(read_binary_value<int>(file));
+    file.close();
 }
 
 void Grid::constantes() {
@@ -115,13 +111,13 @@ void Grid::grid_properties(){
 }
 
 void Grid::print_grid() const {
-    std::cout << "Numero de particulas: " << np << std::endl;
-    std::cout << "Particulas por metro: " << ppm << std::endl;
-    std::cout << "Smoothing length: " << h << std::endl;
-    std::cout<< "Masa particula: " << m <<std::endl;
-    std::cout<< "Tamaño del grid: " << nx << " x " << ny << " x " << nz << std::endl;
-    std::cout<< "Numero de bloques: " << nx*ny*nz << std::endl;
-    std::cout << "Tamaño de bloque: " << sx << " x " << sy << " x " << sz << std::endl;
+    std::cout << "Numero de particulas: " << np << "\n";
+    std::cout << "Particulas por metro: " << ppm << "\n";
+    std::cout << "Smoothing length: " << h << "\n";
+    std::cout<< "Masa particula: " << m <<"\n";
+    std::cout<< "Tamaño del grid: " << nx << " x " << ny << " x " << nz << "\n";
+    std::cout<< "Numero de bloques: " << nx*ny*nz << "\n";
+    std::cout << "Tamaño de bloque: " << sx << " x " << sy << " x " << sz << "\n";
 }
 
 void Grid::simulacion(ParticleArray& particles){
@@ -494,11 +490,11 @@ void Grid::limite_particulas_eje_zmenos1(int id, ParticleArray& particles){
     }
 }
 
-void Grid::escribir_informacion(ParticleArray &particles, const std::string &file_output) {
+void Grid::escribir_informacion(ParticleArray& particles, const std::string& file_output) {
     std::ofstream archivo(file_output, std::ios::binary);
 
     if (!archivo.is_open()) {
-        std::cerr << "Error: No se pudo abrir el archivo para escritura." << std::endl;
+        std::cerr << "Error: No se pudo abrir el archivo para escritura. \n";
         return;
     }
 
@@ -506,7 +502,7 @@ void Grid::escribir_informacion(ParticleArray &particles, const std::string &fil
     archivo.write(reinterpret_cast<const char*>(&ppm_), sizeof(float));
     archivo.write(reinterpret_cast<const char*>(&np), sizeof(int));
 
-    for (int i=0; i<np; i++){
+    for (int i = 0; i < np; ++i) {
         auto px_float = static_cast<float>(particles.px[i]);
         auto py_float = static_cast<float>(particles.py[i]);
         auto pz_float = static_cast<float>(particles.pz[i]);
@@ -518,6 +514,7 @@ void Grid::escribir_informacion(ParticleArray &particles, const std::string &fil
         auto vx_float = static_cast<float>(particles.vx[i]);
         auto vy_float = static_cast<float>(particles.vy[i]);
         auto vz_float = static_cast<float>(particles.vz[i]);
+
         archivo.write(reinterpret_cast<const char*>(&px_float), sizeof(float));
         archivo.write(reinterpret_cast<const char*>(&py_float), sizeof(float));
         archivo.write(reinterpret_cast<const char*>(&pz_float), sizeof(float));
@@ -529,5 +526,4 @@ void Grid::escribir_informacion(ParticleArray &particles, const std::string &fil
         archivo.write(reinterpret_cast<const char*>(&vz_float), sizeof(float));
     }
     archivo.close();
-
 }
