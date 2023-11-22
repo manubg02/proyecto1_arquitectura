@@ -9,6 +9,7 @@
 #include <typeinfo>
 #include <cmath>
 #include <sstream>
+#include "block.hpp"
 
 //Declaracion general para los magic number
 #define NUMBER_315 (315)
@@ -54,10 +55,6 @@ struct ParticleArray {
     std::vector<int> i, j, k; //bloque  i[0],  i[1], ...
 };
 
-struct block{
-    std::vector<int> adjacent_blocks; //Se incluye a el mismo
-    std::vector<int> index_particle_block;
-};
 
 
 class Grid{
@@ -68,18 +65,18 @@ public:
     void grid_properties();
     void print_grid();
     void meter_particulas(const std::string& file_input, ParticleArray& particles);
-    void particle_block(ParticleArray& particles);
+    void particulas_bloque(ParticleArray& particles);
     void crear_bloques();
-    [[nodiscard]] std::vector<int> calc_adjacent_blocks(int bloque_x, int bloque_y, int bloque_z ) const;
-    [[nodiscard]] int operation_block(int operador_x, int operador_y, int operador_z) const;
-    void block_type_check(int bloque_x, int bloque_y, int bloque_z, int bloque_id);
+    [[nodiscard]] std::vector<int> bloques_adyacentes(int bloque_x, int bloque_y, int bloque_z ) const;
+    [[nodiscard]] int calcular_id_bloque(int operador_x, int operador_y, int operador_z) const;
+    void bloque_extremo(int bloque_x, int bloque_y, int bloque_z, int bloque_id);
 
     void simulacion(ParticleArray& particles);
     void reposicionamiento_particulas(ParticleArray& particles);
     void inicializacion_aceleracion_densidad(ParticleArray& particles);
     void actualizar_ac_den(ParticleArray& particles);
     void incremento_densidad(int i, int j, ParticleArray& particles);
-    static double calcular_modulo(int i, int j, ParticleArray& particles);
+    static double calcular_modulo_cuadrado(int i, int j, ParticleArray& particles);
     void transformacion_densidad(int i, ParticleArray& particles);
     void actualizar_aceleracion(int i, int j, ParticleArray& particles);
 
@@ -127,7 +124,7 @@ private:
     double h; //longitud de suavizado
     double nx, ny, nz; //numero de bloques por coordenadas
     double sx, sy, sz; //size del bloque
-    std::vector<block> grid_block;
+    std::vector<bloque> grid_block;
     std::vector<int> nx_0, ny_0, nz_0, nx_menos1, ny_menos1, nz_menos1;
 
     calc calculos{};

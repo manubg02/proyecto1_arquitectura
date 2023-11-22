@@ -65,36 +65,26 @@ void ProgArgs::parseArguments(int argc, char *argv[]) {
         errorCode = -3;
         return;
     }
-    if (file) {
-        file.seekg(4, std::ios::cur);
-
-        int np = static_cast<int>(read_binary_value<int>(file));
-        if (np <= 0) {
-            errorMessage = "Invalid number of particles: 0.";
-            errorCode = -5;
-            return;
-        }
-
-        int count = 0;
-        float aux;
-        while (file.read(reinterpret_cast<char*>(&aux), sizeof(aux))) {
-            file.seekg(-4, std::ios::cur);
-            file.seekg(36, std::ios::cur);
-
-            count += 1;
-        }
-
-        file.clear();  // Limpia cualquier flag de error
-
-        if (count != np) {
-            errorMessage = "Number of particles mismatch. Header: " + std::to_string(np) + ", Found: " + std::to_string(count);
-            errorCode = -5;
-        }
-    }else {
-        std::cerr << "Error opening the file." << std::endl;
+    file.seekg(4, std::ios::cur);
+    int np = static_cast<int>(read_binary_value<int>(file));
+    if (np <= 0) {
+        errorMessage = "Invalid number of particles: 0.";
+        errorCode = -5;
+        return;
     }
-
-
+    int count = 0;
+    float aux;
+    while (file.read(reinterpret_cast<char*>(&aux), sizeof(aux))) {
+        file.seekg(-4, std::ios::cur);
+        file.seekg(36, std::ios::cur);
+        count += 1;
+    }
+    file.clear();  // Limpia cualquier flag de error
+    if (count != np) {
+        errorMessage = "Number of particles mismatch. Header: " + std::to_string(np) + ", Found: " + std::to_string(count);
+        errorCode = -5;
+        return;
+    }
     outputFile = argv[3];
 
     errorCode = 0;
