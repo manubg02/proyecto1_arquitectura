@@ -6,7 +6,7 @@
 #include <cctype>
 #include <fstream>
 
-ProgArgs::ProgArgs(int argc, char *argv[]) {
+ProgArgs::ProgArgs(int argc, char *argv[]) : timeSteps(0), errorCode(0) {
     parseArguments(argc, argv);
 }
 

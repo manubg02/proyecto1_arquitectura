@@ -54,12 +54,12 @@ void Grid::meter_particulas(const std::string& filename, ParticleArray& particle
 
         while (count < np) {
             particles.px[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.i[count] = (particles.px[count] - bmin[0]) / sx;
+            particles.i[count] = static_cast<int>((particles.px[count] - bmin[0]) / sx);
 
             particles.py[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.j[count] = (particles.py[count] - bmin[1]) / sy;
+            particles.j[count] = static_cast<int>((particles.py[count] - bmin[1]) / sy);
             particles.pz[count] = static_cast<double>(read_binary_value<float>(file));
-            particles.k[count] = (particles.pz[count] - bmin[2]) / sz;
+            particles.k[count] = static_cast<int>((particles.pz[count] - bmin[2]) / sz);
 
             particles.hvx[count] = static_cast<double>(read_binary_value<float>(file));
             particles.hvy[count] = static_cast<double>(read_binary_value<float>(file));
@@ -89,14 +89,14 @@ void Grid::get_parameters(const std::string& filename){
 
 void Grid::constantes() {
     calculos.h_cuadrado = pow(h, 2);
-    calculos.h_sexta = pow(h, NUMBER_6);
-    calculos.trans_densidad = (NUMBER_315/(NUMBER_64 * M_PI * pow(h,NUMBER_9))) * m;
+    calculos.h_sexta = pow(h, NUMERO6);
+    calculos.trans_densidad = (NUMERO315 / (NUMERO64 * M_PI * pow(h, NUMERO9))) * m;
 
 
     double const aux_calc = 1/(M_PI * calculos.h_sexta);
-    calculos.calc1 = NUMBER_15 * 3 * m * presion_rigidez * aux_calc * NUMBER_05;
+    calculos.calc1 = NUMERO15 * 3 * m * presion_rigidez * aux_calc * MEDIO;
     calculos.calc2 = 2 * densidad_fluido;
-    calculos.calc3 = NUMBER_45 * viscosidad * m * aux_calc;
+    calculos.calc3 = NUMERO45 * viscosidad * m * aux_calc;
 }
 
 void Grid::grid_properties(){
@@ -114,7 +114,7 @@ void Grid::grid_properties(){
     sz = (bmax[2] - bmin[2])/nz;
 }
 
-void Grid::print_grid() {
+void Grid::print_grid() const {
     std::cout << "Numero de particulas: " << np << std::endl;
     std::cout << "Particulas por metro: " << ppm << std::endl;
     std::cout << "Smoothing length: " << h << std::endl;
@@ -144,7 +144,7 @@ void Grid::simulacion(ParticleArray& particles){
 }
 
 //Transformacion de la densidad y aceleracion
-void Grid::inicializacion_aceleracion_densidad(ParticleArray& particles){
+void Grid::inicializacion_aceleracion_densidad(ParticleArray& particles) const{
     for (int i = 0; i<np; i++){
         particles.ax[i] = gravedad[0];
         particles.ay[i] = gravedad[1];
@@ -154,7 +154,7 @@ void Grid::inicializacion_aceleracion_densidad(ParticleArray& particles){
 }
 
 void Grid::reposicionamiento_particulas(ParticleArray& particles){
-    for (bloque& bloque: grid_block){
+    for (bloque& bloque: bloques_grid){
         bloque.index_particle_block.clear();
     }
     particulas_bloque(particles);
@@ -163,8 +163,8 @@ void Grid::reposicionamiento_particulas(ParticleArray& particles){
 void Grid::actualizar_ac_den(ParticleArray& particles){
     for (int i=0; i<np; i++){
         int const bloque = calcular_id_bloque(particles.i[i], particles.j[i], particles.k[i]);
-        for (int const bloque_adyacente : grid_block[bloque].adjacent_blocks){
-            for (int j : grid_block[bloque_adyacente].index_particle_block){
+        for (int const bloque_adyacente : bloques_grid[bloque].adjacent_blocks){
+            for (int j : bloques_grid[bloque_adyacente].index_particle_block){
                 if (i < j){
                     incremento_densidad(i, j, particles);
 
@@ -178,8 +178,8 @@ void Grid::actualizar_ac_den(ParticleArray& particles){
 
     for (int i=0; i<np; i++){
         int const bloque = calcular_id_bloque(particles.i[i], particles.j[i], particles.k[i]);
-        for (int const bloque_adyacente : grid_block[bloque].adjacent_blocks){
-            for (int j : grid_block[bloque_adyacente].index_particle_block){
+        for (int const bloque_adyacente : bloques_grid[bloque].adjacent_blocks){
+            for (int j : bloques_grid[bloque_adyacente].index_particle_block){
                 if (i < j){
                     actualizar_aceleracion(i, j, particles);
                 }
@@ -188,7 +188,7 @@ void Grid::actualizar_ac_den(ParticleArray& particles){
     }
 }
 
-void Grid::incremento_densidad(int i, int j, ParticleArray& particles){
+void Grid::incremento_densidad(int i, int j, ParticleArray& particles) const{
     double modulo_cuadrado = calcular_modulo_cuadrado(i, j, particles);
     if (modulo_cuadrado < calculos.h_cuadrado){
 
@@ -206,13 +206,13 @@ double Grid::calcular_modulo_cuadrado(int i, int j, ParticleArray& particles){
     return modulo;
 }
 
-void Grid::transformacion_densidad(int i, ParticleArray& particles){
+void Grid::transformacion_densidad(int i, ParticleArray& particles) const{
 
     particles.density[i] = (particles.density[i] + pow(h, 6)) * calculos.trans_densidad;
 
 }
 
-void Grid::actualizar_aceleracion(int i, int j, ParticleArray& particles){
+void Grid::actualizar_aceleracion(int i, int j, ParticleArray& particles) const{
     double modulo_cuadrado = calcular_modulo_cuadrado(i, j, particles);
     if (modulo_cuadrado < calculos.h_cuadrado){
         double const dij = sqrt(std::max(modulo_cuadrado, 1e-12));
@@ -250,7 +250,7 @@ void Grid::colisiones(ParticleArray& particles){
 
 void Grid::bucle_bloque_x0(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             colisiones_particulas_eje_x(particle_id, particles);
         }
@@ -259,16 +259,16 @@ void Grid::bucle_bloque_x0(const std::vector<int> &block_list, ParticleArray& pa
 
 void Grid::bucle_bloque_y0(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             colisiones_particulas_eje_y(particle_id, particles);
         }
     }
 }
 
-void Grid::bucle_bloque_z0(const std::vector<int> &block_list, ParticleArray& particles){
-    for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+void Grid::bucle_bloque_z0(const std::vector<int> &lista_bloques, ParticleArray& particles){
+    for (int block_id: lista_bloques){
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             colisiones_particulas_eje_z(particle_id, particles);
         }
@@ -304,7 +304,7 @@ void Grid::colisiones_particulas_eje_z(int id, ParticleArray& particles){
 
 void Grid::bucle_bloque_xmenos1(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             colisiones_particulas_eje_xmenos1(particle_id, particles);
         }
@@ -312,7 +312,7 @@ void Grid::bucle_bloque_xmenos1(const std::vector<int> &block_list, ParticleArra
 }
 void Grid::bucle_bloque_ymenos1(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             colisiones_particulas_eje_ymenos1(particle_id, particles);
         }
@@ -320,7 +320,7 @@ void Grid::bucle_bloque_ymenos1(const std::vector<int> &block_list, ParticleArra
 }
 void Grid::bucle_bloque_zmenos1(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             colisiones_particulas_eje_zmenos1(particle_id, particles);
         }
@@ -353,7 +353,7 @@ void Grid::colisiones_particulas_eje_zmenos1(int id, ParticleArray& particles){
 }
 
 //Movimiento
-void Grid::movimiento_particulas(ParticleArray& particles){
+void Grid::movimiento_particulas(ParticleArray& particles) const{
     for (int i = 0; i<np; i++){
         act_posicion(i, particles);
         act_velocidad(i, particles);
@@ -368,9 +368,9 @@ void Grid::act_posicion(int i, ParticleArray& particles){
 }
 
 void Grid::act_velocidad(int i, ParticleArray& particles){
-    particles.vx[i] = particles.hvx[i] + (particles.ax[i] * paso_tiempo) * NUMBER_05;
-    particles.vy[i] = particles.hvy[i] + (particles.ay[i] * paso_tiempo) * NUMBER_05;
-    particles.vz[i] = particles.hvz[i] + (particles.az[i] * paso_tiempo) * NUMBER_05;
+    particles.vx[i] = particles.hvx[i] + (particles.ax[i] * paso_tiempo) * MEDIO;
+    particles.vy[i] = particles.hvy[i] + (particles.ay[i] * paso_tiempo) * MEDIO;
+    particles.vz[i] = particles.hvz[i] + (particles.az[i] * paso_tiempo) * MEDIO;
 }
 
 void Grid::act_gradiente(int i, ParticleArray& particles){
@@ -394,7 +394,7 @@ void Grid::limites_recinto(ParticleArray& particles){
 
 void Grid::limite_bloque_x0(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             limite_particulas_eje_x(particle_id, particles);
         }
@@ -403,7 +403,7 @@ void Grid::limite_bloque_x0(const std::vector<int> &block_list, ParticleArray& p
 
 void Grid::limite_bloque_y0(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             limite_particulas_eje_y(particle_id, particles);
         }
@@ -412,7 +412,7 @@ void Grid::limite_bloque_y0(const std::vector<int> &block_list, ParticleArray& p
 
 void Grid::limite_bloque_z0(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             limite_particulas_eje_z(particle_id, particles);
         }
@@ -446,7 +446,7 @@ void Grid::limite_particulas_eje_z(int id, ParticleArray &particles) {
 
 void Grid::limite_bloque_xmenos1(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             limite_particulas_eje_xmenos1(particle_id, particles);
         }
@@ -454,7 +454,7 @@ void Grid::limite_bloque_xmenos1(const std::vector<int> &block_list, ParticleArr
 }
 void Grid::limite_bloque_ymenos1(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             limite_particulas_eje_ymenos1(particle_id, particles);
         }
@@ -462,7 +462,7 @@ void Grid::limite_bloque_ymenos1(const std::vector<int> &block_list, ParticleArr
 }
 void Grid::limite_bloque_zmenos1(const std::vector<int> &block_list, ParticleArray& particles){
     for (int block_id: block_list){
-        bloque const block = grid_block[block_id];
+        bloque const block = bloques_grid[block_id];
         for (int particle_id: block.index_particle_block){
             limite_particulas_eje_zmenos1(particle_id, particles);
         }

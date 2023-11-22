@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
     }
 
     int timeSteps = progArgs.getTimeSteps();
-    std::string inputFile = progArgs.getInputFile();
-    std::string outputFile = progArgs.getOutputFile();
+    const std::string& inputFile = progArgs.getInputFile();
+    const std::string& outputFile = progArgs.getOutputFile();
 
     Grid myGrid(timeSteps, inputFile, outputFile);
 

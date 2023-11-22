@@ -11,13 +11,13 @@ int Grid::calcular_id_bloque(int operador_x, int operador_y, int operador_z) con
 
 void Grid::crear_bloques() {
     int const num_block = static_cast<int>(nx * nz * ny);
-    grid_block.resize(num_block);
+    bloques_grid.resize(num_block);
     for (int bloque_x = 0; bloque_x < nx; bloque_x++) {
         for (int bloque_y = 0; bloque_y < ny; bloque_y++) {
             for (int bloque_z = 0; bloque_z < nz; bloque_z++) {
                 int const bloque_id = calcular_id_bloque(bloque_x, bloque_y, bloque_z);
                 //En las contiguos tambien se incluye a si mismo
-                grid_block[bloque_id].adjacent_blocks = bloques_adyacentes(bloque_x, bloque_y, bloque_z);
+                bloques_grid[bloque_id].adjacent_blocks = bloques_adyacentes(bloque_x, bloque_y, bloque_z);
                 bloque_extremo(bloque_x, bloque_y, bloque_z, bloque_id);
             }
         }
@@ -65,15 +65,15 @@ void Grid::particulas_bloque(ParticleArray& particles) {
         particles.k[index] = floor((particles.pz[index] - bmin[1]) / sy);
 
         if (particles.i[index] > nx - 1) {
-            particles.i[index] = nx - 1;
+            particles.i[index] = static_cast<int>(nx) - 1;
         }
 
         if (particles.j[index] > ny - 1) {
-            particles.j[index] = ny - 1;
+            particles.j[index] = static_cast<int>(ny) - 1;
         }
 
         if (particles.k[index] > nz - 1) {
-            particles.k[index] = nz - 1;
+            particles.k[index] = static_cast<int>(nz) - 1;
         }
 
         if (particles.i[index] < 0) {
@@ -87,7 +87,7 @@ void Grid::particulas_bloque(ParticleArray& particles) {
         }
 
         int const bloque_particula = calcular_id_bloque(particles.i[index], particles.j[index], particles.k[index]);
-        grid_block[bloque_particula].index_particle_block.push_back(index);
+        bloques_grid[bloque_particula].index_particle_block.push_back(index);
 
         index += 1;
 

@@ -11,11 +11,11 @@ class ProgArgs {
 public:
     ProgArgs(int argc, char *argv[]);
 
-    int getTimeSteps() const;
-    const std::string &getInputFile() const;
-    const std::string &getOutputFile() const;
-    int getErrorCode() const;
-    const std::string &getErrorMessage() const;
+    [[nodiscard]] int getTimeSteps() const;
+    [[nodiscard]] const std::string &getInputFile() const;
+    [[nodiscard]] const std::string &getOutputFile() const;
+    [[nodiscard]] int getErrorCode() const;
+    [[nodiscard]] const std::string &getErrorMessage() const;
 
 private:
     void parseArguments(int argc, char *argv[]);

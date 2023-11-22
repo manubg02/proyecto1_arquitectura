@@ -12,13 +12,13 @@
 #include "block.hpp"
 
 //Declaracion general para los magic number
-#define NUMBER_315 (315)
-#define NUMBER_64 (64)
-#define NUMBER_9 (9)
-#define NUMBER_15 (15)
-#define NUMBER_05 (0.5)
-#define NUMBER_6 (6)
-#define NUMBER_45 (45)
+#define NUMERO315 (315)
+#define NUMERO6 (6)
+#define NUMERO9 (9)
+#define NUMERO45 (45)
+#define MEDIO (0.5)
+#define NUMERO64 (64)
+#define NUMERO15 (15)
 
 // Constantes
 const double multiplicador_radio = 1.695;
@@ -63,7 +63,7 @@ public:
     void get_parameters(const std::string& file_input);
     void constantes();
     void grid_properties();
-    void print_grid();
+    void print_grid() const;
     void meter_particulas(const std::string& file_input, ParticleArray& particles);
     void particulas_bloque(ParticleArray& particles);
     void crear_bloques();
@@ -73,17 +73,17 @@ public:
 
     void simulacion(ParticleArray& particles);
     void reposicionamiento_particulas(ParticleArray& particles);
-    void inicializacion_aceleracion_densidad(ParticleArray& particles);
+    void inicializacion_aceleracion_densidad(ParticleArray& particles) const;
     void actualizar_ac_den(ParticleArray& particles);
-    void incremento_densidad(int i, int j, ParticleArray& particles);
+    void incremento_densidad(int i, int j, ParticleArray& particles) const;
     static double calcular_modulo_cuadrado(int i, int j, ParticleArray& particles);
-    void transformacion_densidad(int i, ParticleArray& particles);
-    void actualizar_aceleracion(int i, int j, ParticleArray& particles);
+    void transformacion_densidad(int i, ParticleArray& particles) const;
+    void actualizar_aceleracion(int i, int j, ParticleArray& particles) const;
 
     void colisiones(ParticleArray& particles);
     void bucle_bloque_x0(const std::vector<int>& block_list, ParticleArray& particles);
     void bucle_bloque_y0(const std::vector<int>& block_list, ParticleArray& particles);
-    void bucle_bloque_z0(const std::vector<int>& block_list, ParticleArray& particles);
+    void bucle_bloque_z0(const std::vector<int>& lista_bloques, ParticleArray& particles);
     void bucle_bloque_xmenos1(const std::vector<int> &block_list, ParticleArray& particles);
     void bucle_bloque_ymenos1(const std::vector<int> &block_list, ParticleArray& particles);
     void bucle_bloque_zmenos1(const std::vector<int> &block_list, ParticleArray& particles);
@@ -94,7 +94,7 @@ public:
     static void colisiones_particulas_eje_ymenos1(int id, ParticleArray& particles);
     static void colisiones_particulas_eje_zmenos1(int id, ParticleArray& particles);
 
-    void movimiento_particulas(ParticleArray& particles);
+    void movimiento_particulas(ParticleArray& particles) const;
     static void act_posicion(int i, ParticleArray& particles);
     static void act_velocidad(int i, ParticleArray& particles);
     static void act_gradiente(int i, ParticleArray& particles);
@@ -124,7 +124,7 @@ private:
     double h; //longitud de suavizado
     double nx, ny, nz; //numero de bloques por coordenadas
     double sx, sy, sz; //size del bloque
-    std::vector<bloque> grid_block;
+    std::vector<bloque> bloques_grid;
     std::vector<int> nx_0, ny_0, nz_0, nx_menos1, ny_menos1, nz_menos1;
 
     calc calculos{};
