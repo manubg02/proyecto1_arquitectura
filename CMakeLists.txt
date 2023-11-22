@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 # Set compiler options
 add_compile_options(-Wall -Wextra -Werror -pedantic -pedantic-errors)
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} −march=native")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 # Enable GoogleTest Library
 include(FetchContent)
 FetchContent_Declare(
@@ -32,6 +32,9 @@ include_directories (PUBLIC .)
 # Process cmake from sim and fluid directories
 add_subdirectory(sim)
 add_subdirectory(fluid)
+
+# Set the executable output path to the project directory
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 # Unit tests and functional tests
 #enable_testing()
 #add_subdirectory(utest)

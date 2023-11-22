@@ -5,9 +5,6 @@
 #include "grid.hpp"
 #include <stdexcept>
 #include <sstream>
-#include <typeinfo>
-
-
 
 template <typename T>
 T read_binary_value(std::ifstream& infile) {
@@ -18,7 +15,7 @@ T read_binary_value(std::ifstream& infile) {
 
 
 
-Grid::Grid(int time, std::string const& file_input)
+Grid::Grid(int time, std::string const& file_input, std::string const& file_output)
         : timeSteps(time), ppm(0), np(0), m(0), h(0), nx(0), ny(0), nz(0), sx(0), sy(0), sz(0){
     get_parameters(file_input);
     constantes();
@@ -28,6 +25,7 @@ Grid::Grid(int time, std::string const& file_input)
     ParticleArray particles;
     meter_particulas(file_input, particles);
     simulacion(particles);
+    escribir_informacion(particles, file_output);
         }
 
 
@@ -46,6 +44,10 @@ void Grid::meter_particulas(const std::string& filename, ParticleArray& particle
     particles.i.resize(np);
     particles.j.resize(np);
     particles.k.resize(np);
+    particles.density.resize(np);
+    particles.ax.resize(np);
+    particles.ay.resize(np);
+    particles.az.resize(np);
 
     int count = 0;
 
@@ -116,7 +118,7 @@ void Grid::get_parameters(const std::string& filename){
     std::ostringstream errorMessage;
     if (file){
         ppm = static_cast<double>(read_binary_value<float>(file));
-        np = static_cast<double>(read_binary_value<float>(file));
+        np = static_cast<int>(read_binary_value<int>(file));
     }
 }
 
@@ -573,4 +575,42 @@ void Grid::limite_particulas_eje_zmenos1(int id, ParticleArray& particles){
         particles.vz[id] = -particles.vz[id];
         particles.hvz[id] = -particles.hvz[id];
     }
+}
+
+void Grid::escribir_informacion(ParticleArray &particles, const std::string &file_output) {
+    std::ofstream archivo(file_output, std::ios::binary);
+
+    if (!archivo.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo para escritura." << std::endl;
+        return;
+    }
+
+    float ppm_ = static_cast<float>(ppm);
+    archivo.write(reinterpret_cast<const char*>(&ppm_), sizeof(float));
+    archivo.write(reinterpret_cast<const char*>(&np), sizeof(int));
+
+    for (int i=0; i<np; i++){
+        float px_float = static_cast<float>(particles.px[i]);
+        float py_float = static_cast<float>(particles.py[i]);
+        float pz_float = static_cast<float>(particles.pz[i]);
+
+        float hvx_float = static_cast<float>(particles.hvx[i]);
+        float hvy_float = static_cast<float>(particles.hvy[i]);
+        float hvz_float = static_cast<float>(particles.hvz[i]);
+
+        float vx_float = static_cast<float>(particles.vx[i]);
+        float vy_float = static_cast<float>(particles.vy[i]);
+        float vz_float = static_cast<float>(particles.vz[i]);
+        archivo.write(reinterpret_cast<const char*>(&px_float), sizeof(float));
+        archivo.write(reinterpret_cast<const char*>(&py_float), sizeof(float));
+        archivo.write(reinterpret_cast<const char*>(&pz_float), sizeof(float));
+        archivo.write(reinterpret_cast<const char*>(&hvx_float), sizeof(float));
+        archivo.write(reinterpret_cast<const char*>(&hvy_float), sizeof(float));
+        archivo.write(reinterpret_cast<const char*>(&hvz_float), sizeof(float));
+        archivo.write(reinterpret_cast<const char*>(&vx_float), sizeof(float));
+        archivo.write(reinterpret_cast<const char*>(&vy_float), sizeof(float));
+        archivo.write(reinterpret_cast<const char*>(&vz_float), sizeof(float));
+    }
+
+    archivo.close();
 }

@@ -10,6 +10,13 @@ ProgArgs::ProgArgs(int argc, char *argv[]) {
     parseArguments(argc, argv);
 }
 
+template <typename T>
+T read_binary_value(std::ifstream& infile) {
+    T value;
+    infile.read(reinterpret_cast<char*>(&value), sizeof(T));
+    return value;
+}
+
 void ProgArgs::parseArguments(int argc, char *argv[]) {
     // Verificar el número correcto de argumentos
     if (argc != 4) {
@@ -60,9 +67,8 @@ void ProgArgs::parseArguments(int argc, char *argv[]) {
     }
     if (file) {
         file.seekg(4, std::ios::cur);
-        int32_t intValue;
-        file.read(reinterpret_cast<char*>(&intValue), sizeof(intValue));
-        int np = *reinterpret_cast<int*>(&intValue);
+
+        int np = static_cast<int>(read_binary_value<int>(file));
         if (np <= 0) {
             errorMessage = "Invalid number of particles: 0.";
             errorCode = -5;

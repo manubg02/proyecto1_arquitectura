@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     std::string inputFile = progArgs.getInputFile();
     std::string outputFile = progArgs.getOutputFile();
 
-    Grid myGrid(timeSteps, inputFile);
+    Grid myGrid(timeSteps, inputFile, outputFile);
 
 
     return 0;

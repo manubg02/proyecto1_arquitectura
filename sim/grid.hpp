@@ -62,7 +62,7 @@ struct block{
 
 class Grid{
 public:
-    Grid(int timeSteps, std::string const& file_input);
+    Grid(int timeSteps, std::string const& file_input, std::string const& file_output);
     void get_parameters(const std::string& file_input);
     void constantes();
     void grid_properties();
@@ -115,6 +115,8 @@ public:
     static void limite_particulas_eje_xmenos1(int id, ParticleArray& particles);
     static void limite_particulas_eje_ymenos1(int id, ParticleArray& particles);
     static void limite_particulas_eje_zmenos1(int id, ParticleArray& particles);
+
+    void escribir_informacion(ParticleArray& particles, std::string const& file_output);
 
 
 private:
