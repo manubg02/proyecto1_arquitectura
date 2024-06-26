@@ -1,3 +1,3 @@
-/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-subbuild/CMakeFiles/gsl-populate.dir
-/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-subbuild/CMakeFiles/edit_cache.dir
-/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-subbuild/CMakeFiles/rebuild_cache.dir
+/home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-subbuild/CMakeFiles/gsl-populate.dir
+/home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-subbuild/CMakeFiles/edit_cache.dir
+/home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-subbuild/CMakeFiles/rebuild_cache.dir

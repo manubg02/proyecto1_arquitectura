@@ -1,0 +1,12 @@
+/home/manu/Desktop/proyecto/build/CMakeFiles/edit_cache.dir
+/home/manu/Desktop/proyecto/build/CMakeFiles/rebuild_cache.dir
+/home/manu/Desktop/proyecto/build/_deps/gsl-build/CMakeFiles/edit_cache.dir
+/home/manu/Desktop/proyecto/build/_deps/gsl-build/CMakeFiles/rebuild_cache.dir
+/home/manu/Desktop/proyecto/build/_deps/gsl-build/include/CMakeFiles/edit_cache.dir
+/home/manu/Desktop/proyecto/build/_deps/gsl-build/include/CMakeFiles/rebuild_cache.dir
+/home/manu/Desktop/proyecto/build/sim/CMakeFiles/sim.dir
+/home/manu/Desktop/proyecto/build/sim/CMakeFiles/edit_cache.dir
+/home/manu/Desktop/proyecto/build/sim/CMakeFiles/rebuild_cache.dir
+/home/manu/Desktop/proyecto/build/fluid/CMakeFiles/fluid.dir
+/home/manu/Desktop/proyecto/build/fluid/CMakeFiles/edit_cache.dir
+/home/manu/Desktop/proyecto/build/fluid/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,4 @@
-# Install script for directory: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim
+# Install script for directory: /home/manu/Desktop/proyecto/sim
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

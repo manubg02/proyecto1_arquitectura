@@ -1,4 +1,4 @@
-# Install script for directory: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-subbuild
+# Install script for directory: /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-subbuild
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-subbuild/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-subbuild/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

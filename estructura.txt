@@ -1,3 +1,0 @@
-Progargs --> argumentos
-grid --> leer particulas y grid
-bock --> 

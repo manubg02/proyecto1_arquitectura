@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: proyecto1_arquitectura
+# Project: fluid
 # Configurations: Debug
 # =============================================================================
 
@@ -39,62 +39,13 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/
-# =============================================================================
-# Object build statements for EXECUTABLE target fluid
-
-
-#############################################
-# Order-only phony target for fluid
-
-build cmake_object_order_depends_target_fluid: phony || CMakeFiles/fluid.dir
-
-build CMakeFiles/fluid.dir/fluid/fluid.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/fluid/fluid.cpp || cmake_object_order_depends_target_fluid
-  DEP_FILE = CMakeFiles/fluid.dir/fluid/fluid.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/fluid.dir
-  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/fluid
-
-build CMakeFiles/fluid.dir/sim/progargs.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/progargs.cpp || cmake_object_order_depends_target_fluid
-  DEP_FILE = CMakeFiles/fluid.dir/sim/progargs.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/fluid.dir
-  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/sim
-
-build CMakeFiles/fluid.dir/sim/grid.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/grid.cpp || cmake_object_order_depends_target_fluid
-  DEP_FILE = CMakeFiles/fluid.dir/sim/grid.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/fluid.dir
-  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/sim
-
-build CMakeFiles/fluid.dir/sim/block.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/sim/block.cpp || cmake_object_order_depends_target_fluid
-  DEP_FILE = CMakeFiles/fluid.dir/sim/block.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/fluid.dir
-  OBJECT_FILE_DIR = CMakeFiles/fluid.dir/sim
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target fluid
-
-
-#############################################
-# Link the executable fluid
-
-build fluid: CXX_EXECUTABLE_LINKER__fluid_Debug CMakeFiles/fluid.dir/fluid/fluid.cpp.o CMakeFiles/fluid.dir/sim/progargs.cpp.o CMakeFiles/fluid.dir/sim/grid.cpp.o CMakeFiles/fluid.dir/sim/block.cpp.o
-  FLAGS = -g
-  OBJECT_DIR = CMakeFiles/fluid.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = fluid
-  TARGET_PDB = fluid.dbg
-
+cmake_ninja_workdir = /home/manu/Desktop/proyecto/cmake-build-debug/
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug && /snap/clion/250/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug && /snap/clion/250/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -105,7 +56,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug && /snap/clion/250/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura -B/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug && /snap/clion/250/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/manu/Desktop/proyecto -B/home/manu/Desktop/proyecto/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -113,7 +64,214 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/manu/Desktop/proyecto/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build _deps/gsl-build/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-build && /snap/clion/250/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build _deps/gsl-build/edit_cache: phony _deps/gsl-build/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build _deps/gsl-build/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-build && /snap/clion/250/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/manu/Desktop/proyecto -B/home/manu/Desktop/proyecto/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build _deps/gsl-build/rebuild_cache: phony _deps/gsl-build/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-src/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build _deps/gsl-build/include/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-build/include && /snap/clion/250/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build _deps/gsl-build/include/edit_cache: phony _deps/gsl-build/include/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build _deps/gsl-build/include/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-build/include && /snap/clion/250/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/manu/Desktop/proyecto -B/home/manu/Desktop/proyecto/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build _deps/gsl-build/include/rebuild_cache: phony _deps/gsl-build/include/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/manu/Desktop/proyecto/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target sim
+
+
+#############################################
+# Order-only phony target for sim
+
+build cmake_object_order_depends_target_sim: phony || sim/CMakeFiles/sim.dir
+
+build sim/CMakeFiles/sim.dir/progargs.cpp.o: CXX_COMPILER__sim_unscanned_Debug /home/manu/Desktop/proyecto/sim/progargs.cpp || cmake_object_order_depends_target_sim
+  DEP_FILE = sim/CMakeFiles/sim.dir/progargs.cpp.o.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always -Wall -Wextra -Werror -pedantic -pedantic-errors
+  INCLUDES = -I/home/manu/Desktop/proyecto/PUBLIC -I/home/manu/Desktop/proyecto/. -isystem /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-src/include
+  OBJECT_DIR = sim/CMakeFiles/sim.dir
+  OBJECT_FILE_DIR = sim/CMakeFiles/sim.dir
+  TARGET_COMPILE_PDB = sim/CMakeFiles/sim.dir/sim.pdb
+  TARGET_PDB = sim/libsim.pdb
+
+build sim/CMakeFiles/sim.dir/grid.cpp.o: CXX_COMPILER__sim_unscanned_Debug /home/manu/Desktop/proyecto/sim/grid.cpp || cmake_object_order_depends_target_sim
+  DEP_FILE = sim/CMakeFiles/sim.dir/grid.cpp.o.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always -Wall -Wextra -Werror -pedantic -pedantic-errors
+  INCLUDES = -I/home/manu/Desktop/proyecto/PUBLIC -I/home/manu/Desktop/proyecto/. -isystem /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-src/include
+  OBJECT_DIR = sim/CMakeFiles/sim.dir
+  OBJECT_FILE_DIR = sim/CMakeFiles/sim.dir
+  TARGET_COMPILE_PDB = sim/CMakeFiles/sim.dir/sim.pdb
+  TARGET_PDB = sim/libsim.pdb
+
+build sim/CMakeFiles/sim.dir/block.cpp.o: CXX_COMPILER__sim_unscanned_Debug /home/manu/Desktop/proyecto/sim/block.cpp || cmake_object_order_depends_target_sim
+  DEP_FILE = sim/CMakeFiles/sim.dir/block.cpp.o.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always -Wall -Wextra -Werror -pedantic -pedantic-errors
+  INCLUDES = -I/home/manu/Desktop/proyecto/PUBLIC -I/home/manu/Desktop/proyecto/. -isystem /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-src/include
+  OBJECT_DIR = sim/CMakeFiles/sim.dir
+  OBJECT_FILE_DIR = sim/CMakeFiles/sim.dir
+  TARGET_COMPILE_PDB = sim/CMakeFiles/sim.dir/sim.pdb
+  TARGET_PDB = sim/libsim.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target sim
+
+
+#############################################
+# Link the static library sim/libsim.a
+
+build sim/libsim.a: CXX_STATIC_LIBRARY_LINKER__sim_Debug sim/CMakeFiles/sim.dir/progargs.cpp.o sim/CMakeFiles/sim.dir/grid.cpp.o sim/CMakeFiles/sim.dir/block.cpp.o
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = sim/CMakeFiles/sim.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = sim/CMakeFiles/sim.dir/sim.pdb
+  TARGET_FILE = sim/libsim.a
+  TARGET_PDB = sim/libsim.pdb
+
+
+#############################################
+# Utility command for edit_cache
+
+build sim/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug/sim && /snap/clion/250/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build sim/edit_cache: phony sim/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build sim/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug/sim && /snap/clion/250/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/manu/Desktop/proyecto -B/home/manu/Desktop/proyecto/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build sim/rebuild_cache: phony sim/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/manu/Desktop/proyecto/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target fluid
+
+
+#############################################
+# Order-only phony target for fluid
+
+build cmake_object_order_depends_target_fluid: phony || cmake_object_order_depends_target_sim
+
+build fluid/CMakeFiles/fluid.dir/fluid.cpp.o: CXX_COMPILER__fluid_unscanned_Debug /home/manu/Desktop/proyecto/fluid/fluid.cpp || cmake_object_order_depends_target_fluid
+  DEP_FILE = fluid/CMakeFiles/fluid.dir/fluid.cpp.o.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always -Wall -Wextra -Werror -pedantic -pedantic-errors
+  INCLUDES = -I/home/manu/Desktop/proyecto/PUBLIC -I/home/manu/Desktop/proyecto/.
+  OBJECT_DIR = fluid/CMakeFiles/fluid.dir
+  OBJECT_FILE_DIR = fluid/CMakeFiles/fluid.dir
+  TARGET_COMPILE_PDB = fluid/CMakeFiles/fluid.dir/
+  TARGET_PDB = fluid/fluid.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target fluid
+
+
+#############################################
+# Link the executable fluid/fluid
+
+build fluid/fluid: CXX_EXECUTABLE_LINKER__fluid_Debug fluid/CMakeFiles/fluid.dir/fluid.cpp.o | sim/libsim.a || sim/libsim.a
+  FLAGS = -g
+  LINK_LIBRARIES = sim/libsim.a
+  OBJECT_DIR = fluid/CMakeFiles/fluid.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = fluid/CMakeFiles/fluid.dir/
+  TARGET_FILE = fluid/fluid
+  TARGET_PDB = fluid/fluid.pdb
+
+
+#############################################
+# Utility command for edit_cache
+
+build fluid/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug/fluid && /snap/clion/250/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build fluid/edit_cache: phony fluid/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build fluid/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/manu/Desktop/proyecto/cmake-build-debug/fluid && /snap/clion/250/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/manu/Desktop/proyecto -B/home/manu/Desktop/proyecto/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build fluid/rebuild_cache: phony fluid/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
+
+build fluid: phony fluid/fluid
+
+build libsim.a: phony sim/libsim.a
+
+build sim: phony sim/libsim.a
 
 # =============================================================================
 # Folder targets.
@@ -121,9 +279,37 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 #############################################
-# Folder: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug
+# Folder: /home/manu/Desktop/proyecto/cmake-build-debug
 
-build all: phony fluid
+build all: phony _deps/gsl-build/all sim/all fluid/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-build
+
+build _deps/gsl-build/all: phony _deps/gsl-build/include/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-build/include
+
+build _deps/gsl-build/include/all: phony
+
+# =============================================================================
+
+#############################################
+# Folder: /home/manu/Desktop/proyecto/cmake-build-debug/fluid
+
+build fluid/all: phony fluid/fluid
+
+# =============================================================================
+
+#############################################
+# Folder: /home/manu/Desktop/proyecto/cmake-build-debug/sim
+
+build sim/all: phony sim/libsim.a
 
 # =============================================================================
 # Built-in targets
@@ -132,14 +318,14 @@ build all: phony fluid
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/CMakeLists.txt /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-C.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/manu/Desktop/proyecto/CMakeLists.txt /home/manu/Desktop/proyecto/fluid/CMakeLists.txt /home/manu/Desktop/proyecto/sim/CMakeLists.txt /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/BasicConfigVersion-SameMajorVersion.cmake.in /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXCompiler.cmake.in /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCompilerIdDetection.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCXXCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCompileFeatures.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeFindBinUtils.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakePackageConfigHelpers.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseImplicitIncludeInfo.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseImplicitLinkInfo.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseLibraryArchitecture.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystem.cmake.in /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeTestCompilerCommon.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/ADSP-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/ARMCC-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/ARMClang-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/AppleClang-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Borland-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Clang-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Cray-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GHS-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-FindBinUtils.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/IAR-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Intel-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/MSVC-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/NVHPC-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/PGI-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/PathScale-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/SCO-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/TI-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Tasking-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Watcom-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FetchContent.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FetchContent/CMakeLists.cmake.in /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindGit.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/FeatureTesting.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-Determine-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake _deps/gsl-src/CMakeLists.txt _deps/gsl-src/cmake/guidelineSupportLibrary.cmake _deps/gsl-src/include/CMakeLists.txt
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/CMakeLists.txt /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-C.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
+build /home/manu/Desktop/proyecto/CMakeLists.txt /home/manu/Desktop/proyecto/fluid/CMakeLists.txt /home/manu/Desktop/proyecto/sim/CMakeLists.txt /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/BasicConfigVersion-SameMajorVersion.cmake.in /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXCompiler.cmake.in /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCompilerIdDetection.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCXXCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCompileFeatures.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeFindBinUtils.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakePackageConfigHelpers.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseImplicitIncludeInfo.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseImplicitLinkInfo.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseLibraryArchitecture.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystem.cmake.in /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeTestCompilerCommon.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/ADSP-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/ARMCC-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/ARMClang-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/AppleClang-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Borland-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Clang-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Cray-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GHS-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-FindBinUtils.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/IAR-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Intel-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/MSVC-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/NVHPC-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/PGI-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/PathScale-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/SCO-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/TI-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Tasking-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/Watcom-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FetchContent.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FetchContent/CMakeLists.cmake.in /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindGit.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/FeatureTesting.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-Determine-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /snap/clion/250/bin/cmake/linux/x64/share/cmake-3.26/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake _deps/gsl-src/CMakeLists.txt _deps/gsl-src/cmake/guidelineSupportLibrary.cmake _deps/gsl-src/include/CMakeLists.txt: phony
 
 
 #############################################

@@ -11,7 +11,7 @@
 #include <sstream>
 #include "block.hpp"
 
-//Declaracion general para los magic number
+//Declaracion para los magic number
 #define NUMERO315 (315)
 #define NUMERO6 (6)
 #define NUMERO9 (9)
@@ -32,10 +32,11 @@ const double paso_tiempo = 0.001;
 const double comparar_colision = 1e-10;
 
 // Constantes vectoriales
-const std::vector<double> gravedad = {0.0, -9.8, 0.0};
-const std::vector<double> bmax = {0.065, 0.1, 0.065};
-const std::vector<double> bmin = {-0.065, -0.08, -0.065};
+const std::vector<double> gravedad = {0.0, -9.8, 0.0}; // Vector con los valores de la gravedad en cada eje
+const std::vector<double> bmax = {0.065, 0.1, 0.065}; // Vector con los limites superiores del recinto
+const std::vector<double> bmin = {-0.065, -0.08, -0.065}; // Vector con los limites inferiores del recinto
 
+// Struct para hacer calculos constantes para no tener que calcularlos multiples veces en los bucles
 struct calc{
     double h_cuadrado;
     double trans_densidad;
@@ -56,7 +57,7 @@ struct ParticleArray {
 };
 
 
-
+// Clase Grid con todas las funciones empleadas
 class Grid{
 public:
     Grid(int timeSteps, std::string const& file_input, std::string const& file_output);

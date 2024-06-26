@@ -1,4 +1,10 @@
-/snap/clion/250/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura -B /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura
+/snap/clion/250/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/250/bin/ninja/linux/x64/ninja -G Ninja -S /home/manu/Desktop/proyecto -B /home/manu/Desktop/proyecto/cmake-build-debug
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
 -- Configuring done (1.3s)
 -- Generating done (0.0s)
--- Build files have been written to: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura
+-- Build files have been written to: /home/manu/Desktop/proyecto/cmake-build-debug

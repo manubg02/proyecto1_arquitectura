@@ -1,4 +1,4 @@
-# Install script for directory: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-src
+# Install script for directory: /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,6 +44,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-build/include/cmake_install.cmake")
+  include("/home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-build/include/cmake_install.cmake")
 endif()
 

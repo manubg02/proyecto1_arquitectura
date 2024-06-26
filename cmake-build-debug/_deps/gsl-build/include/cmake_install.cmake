@@ -1,4 +1,4 @@
-# Install script for directory: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/cmake-build-debug/_deps/gsl-src/include
+# Install script for directory: /home/manu/Desktop/proyecto/cmake-build-debug/_deps/gsl-src/include
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -1,4 +1,4 @@
-# Install script for directory: /home/manu/CarlosIII/Arquitectura/proyecto1_arquitectura/fluid
+# Install script for directory: /home/manu/Desktop/proyecto/fluid
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

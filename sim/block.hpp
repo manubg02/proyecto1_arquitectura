@@ -9,7 +9,7 @@
 #include <vector>
 
 struct bloque{
-    std::vector<int> adjacent_blocks; //Se incluye a el mismo
+    std::vector<int> adjacent_blocks; // Se incluye a él mismo
     std::vector<int> index_particle_block;
 };
 
